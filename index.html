@@ -1,13 +1,21 @@
 ---
 layout: default
-title: Orestes' blog
+title: Orestes Carracedo
 ---
+<div class="col_2"></div>
+<div id="home" class="col_8">
+    <h1>{{ page.title }}</h1>
 
-<div id="home">
-  <h1>Blog Posts</h1>
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-    {% endfor %}
-  </ul>
+    <div class="posts">
+        {% for post in site.posts %}
+            <div class="post">
+                <div class="title"><a href="{{ post.url }}">{{ post.title }}</a></div>
+                <div class="date">{{ post.date | date_to_long_string  }}</div>
+                <div class="content">{{ post.content }}</div>
+                <div class="comments">Comments</div>
+            </div>
+        {% endfor %}
+    </div>
+
 </div>
+<div class="col_2"></div>

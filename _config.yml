@@ -1,1 +1,4 @@
 linenos: true
+pagination: 10
+include: [_post_contents, css, assets]
+ga_tracking_code: UA-34829303-1
