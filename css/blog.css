@@ -8,6 +8,7 @@ a:hover {
 
 div.post div.title {
     font-size: 2em;
+    line-height: 1.1em;
 }
 div.post div.date {
     margin-top: 0.3em;

@@ -1,4 +1,5 @@
 linenos: true
 pagination: 10
 include: [_post_contents, css, assets]
+title: Orestes Carracedo
 ga_tracking_code: UA-34829303-1
