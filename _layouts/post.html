@@ -1,17 +1,11 @@
 ---
-layout: default
+layout: page
 ---
-<div class="col_2"></div>
-<div class="col_8">
-    <h2 class="header"><a href="/">{{ site.title }}</a></h2>
-    <div class="post">
-        <div class="title">{{ page.title }} </div>
-        <div class="date">{{ page.date | date_to_long_string  }}</div>
-        {{ content }}
-    </div>
-    <div id="disqus_thread"></div>
-</div>
-<div class="col_2"></div>
+<article class="post">
+    {% assign post = page %}
+    {% include post.html %}
+    <div id="disqus_thread"></div> <!-- /disquss -->
+</article><!-- /post -->
 
 <script type="text/javascript">
     var disqus_shortname = 'orestes';

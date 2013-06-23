@@ -1,5 +1,19 @@
 linenos: true
 pagination: 10
-include: [_post_contents, css, assets]
-title: Orestes Carracedo
+include: [assets, css, img]
+
+category_dir: category
+tag_dir: tag
+
+permalink: /:year/:month/:day/:title
+
 ga_tracking_code: UA-34829303-1
+
+url: http://blog.orestes.io
+title: Orestes Carracedo
+
+author_name: Orestes Carracedo
+author_email: orestes.ca@gmail.com
+
+feed_title: Orestes Carracedo
+feed_url: http://feeds.feedburner.com/orestes/blog

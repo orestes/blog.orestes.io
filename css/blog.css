@@ -1,3 +1,11 @@
+html, body {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+body {
+    background-image: url('/assets/subtle_grunge.png');
+}
+
 a {
     text-decoration: none;
 }
@@ -6,29 +14,71 @@ a:hover {
     text-decoration: underline;
 }
 
-div.post div.title {
+div.post > div.title {
     font-size: 1.5em;
     line-height: 1.1em;
 }
-div.post div.date {
+div.post > div.date {
     margin-top: 0.3em;
 }
 
 div.post {
-    margin-top: 2em;
+    margin-top: 1em;
 }
 
-div.post img {
+div.post > img {
     border: 1px solid silver;
     padding: 0.3em;
     margin: 0.5em 0;
 }
 
-h2.header a {
+h2.header > a {
     color: black;
     text-decoration: none;
 }
 
-h2.header a:hover {
+h2.header > a:hover {
     text-decoration: underline;
+}
+
+div.footer {
+    border-top: 1px solid silver;
+    text-align: center;
+    padding: 1em;
+    margin-top: 1em;
+}
+
+div.grid.main {
+    max-width: 940px;
+    margin: 0 auto;
+}
+
+aside.sidebar {
+    padding-left: 1em;
+}
+
+aside.sidebar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+aside.sidebar > ul > ul, aside.sidebar > ul.links  {
+    margin-left: 1em;
+}
+
+div#disqus_thread {
+    margin-top: 2em;
+}
+
+div.post > div.date {
+    font-weight: bold;
+}
+
+div.title {
+    font-weight: bold;
+}
+
+div.post > div.content {
+    padding-top: 1em;
 }

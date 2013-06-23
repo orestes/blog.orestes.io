@@ -1,0 +1,25 @@
+<h5>About me</h5>
+<ul class="links">
+    <li style="margin-left: -5px"><img src="http://orestescarracedo.com/favicon.ico" alt=""/> <a href="http://orestescarracedo.com">My homepage</a></li>
+    <li><i class="icon-rss"></i> <a href="/atom.xml">Subscribe</a></li>
+</ul>
+
+<h5>Social</h5>
+<ul class="links">
+    <li><i class="icon-twitter"></i> Twitter</li>
+    <li><i class="icon-github"></i> GitHub</li>
+    <li><i class="icon-google-plus"></i> Google +</li>
+    <li><i class="icon-linkedin"></i> LinkedIn</li>
+</ul>
+
+<h5>Archive</h5>
+<ul class="year">
+    {% for year in site.year_index %}
+    <li class="title">{{ year }}</li>
+    <ul class="month">
+        {% for month in site.month_index[year] %}
+        <li>({{ site.post_count[year][month] }}) <a href="/archive/{{ year }}/{{ month }}/">{{ month | month_name }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+</ul>
