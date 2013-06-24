@@ -1,3 +1,4 @@
+<!-- post -->
 <div class="post">
     <div class="title"><a href="{{ post.url }}">{{ post.title }}</a></div>
     <div class="date">{{ post.date | date_to_long_string  }}</div>
@@ -7,4 +8,6 @@
     {% if show_comment_count %}
     <div class="comments">Comments: <a href="{{ post.url }}#disqus_thread">--</a></div>
     {% endif %}
+    <br class="clearfix">
 </div>
+<!-- /post -->

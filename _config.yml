@@ -1,11 +1,11 @@
-linenos: true
-pagination: 10
+paginate: 10
 include: [assets, css, img]
 
+archive_dir: archive
 category_dir: category
 tag_dir: tag
 
-permalink: /:year/:month/:day/:title
+permalink: /archive/:year/:month/:day/:title
 
 ga_tracking_code: UA-34829303-1
 

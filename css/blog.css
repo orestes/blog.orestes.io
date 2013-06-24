@@ -1,9 +1,11 @@
 html, body {
     font-family: 'Source Sans Pro', sans-serif;
+    color: #5c5c5c;
 }
 
 body {
     background-image: url('/assets/subtle_grunge.png');
+    background-image: url('/assets/grey.png');
 }
 
 a {
@@ -32,15 +34,6 @@ div.post > img {
     margin: 0.5em 0;
 }
 
-h2.header > a {
-    color: black;
-    text-decoration: none;
-}
-
-h2.header > a:hover {
-    text-decoration: underline;
-}
-
 div.footer {
     border-top: 1px solid silver;
     text-align: center;
@@ -63,8 +56,16 @@ aside.sidebar ul {
     padding: 0;
 }
 
-aside.sidebar > ul > ul, aside.sidebar > ul.links  {
+aside.sidebar {
+    margin-top: 6em;
+}
+aside.sidebar ul ul, aside.sidebar ul.links  {
     margin-left: 1em;
+    font-weight: normal;
+}
+
+aside.sidebar ul.year {
+    font-weight: bold;
 }
 
 div#disqus_thread {
@@ -81,4 +82,30 @@ div.title {
 
 div.post > div.content {
     padding-top: 1em;
+}
+
+div.post img {
+    float: left;
+    max-width: 150px;
+    border: 1px solid silver;
+    padding: 2px;
+    margin-right: 1em;
+}
+
+.clearfix {
+    clear: both;
+}
+
+div.pagination {
+    text-align: center;
+}
+div.header {
+    margin-bottom: 2em;
+}
+
+div.post iframe {
+    width: 100%;
+    min-width: 320px;
+    max-width: 680px;
+    min-height: 320px;
 }
