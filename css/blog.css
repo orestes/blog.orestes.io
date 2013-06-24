@@ -104,6 +104,7 @@ div.header {
 }
 
 div.post iframe {
+    border: none;
     width: 100%;
     min-width: 320px;
     max-width: 680px;
