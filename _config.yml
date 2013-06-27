@@ -1,5 +1,5 @@
 paginate: 10
-include: [assets, css, js, img]
+include: [assets, css, js, img, do-not-track]
 
 archive_dir: archive
 category_dir: category
