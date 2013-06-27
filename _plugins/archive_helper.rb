@@ -12,8 +12,6 @@ class Jekyll::Site
                 y = post.date.year
                 m = "%02d" % post.date.month.to_i
 
-                puts m
-
                 if month_index[y].nil?
                   year_index << y
                   post_count[y] = {}

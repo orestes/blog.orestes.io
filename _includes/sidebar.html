@@ -20,7 +20,6 @@
     <li>
         <ul class="month">
             {% for month in site.month_index[year] %}
-            Month: {{ month }}
             <li>({{ site.post_count[year][month] }}) <a href="/archive/{{ year }}/{{ month }}/">{{ month | month_name }}</a></li>
             {% endfor %}
         </ul>
