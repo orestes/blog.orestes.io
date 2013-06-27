@@ -1,81 +1,24 @@
+---
+layout: nil
+---
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <title>Orestes Carracedo</title>
-    <link href="http://blog.orestes.io/atom.xml" rel="self" />
-    <link href="http://blog.orestes.io" />
-    <updated>2013-06-26T21:08:51+02:00</updated>
-    <id>http://blog.orestes.io</id>
-    <author>
-        <name></name>
-        <email>orestes.ca@gmail.com</email>
-    </author>
-    
-    <entry>
-        <title>Migrating from Wordpress to Jekyll on GitHub Pages</title>
-        <link href="http://blog.orestes.io/archive/2013/06/09/migrating-from-wordpress-jekyll-github-pages"/>
-        <updated>2013-06-09T00:00:00+02:00</updated>
-        <id>http://blog.orestes.io/archive/2013/06/09/migrating-from-wordpress-jekyll-github-pages</id>
-        <content type="html">&lt;p&gt;Besides my writting skills, my problem with blogging was the software I was using, Wordpress. Although I made use of lots of the features something just never seemed right. I found it slow heavy and often insecure. I didn&amp;#8217;t want my vm exploding whenever I got a traffic spike, I didn&amp;#8217;t want to be patching and upgrading my WP modules and being worried about security issues. It was kind of hard to get it to look the way I wanted it. I wrote a custom theme but I wasn&amp;#8217;t really satisfied with it, so I bought a one which looked cool, but I still wasn&amp;#8217;t happy with my blog because it wasn&amp;#8217;t &amp;#8220;mine&amp;#8221;.&lt;/p&gt;
-
-&lt;p&gt;I wanted a static blog website that I could code and style however I wanted. So I started researching about scaffolding tools and generators for static websites and I found about GitHub Pages and Jekyll. I had read about them in the past but never really tried. When I got to it I knew I had found the solution for me.&lt;/p&gt;
-
-&lt;p&gt;The pros of switching from WP on my hosting to Jekyll on gh-pages&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;I don&amp;#8217;t have to worry about security issues since everything is static&lt;/li&gt;
-
-&lt;li&gt;I can version my posts and contents using a CVS I love (git)&lt;/li&gt;
-
-&lt;li&gt;I can &lt;em&gt;easily&lt;/em&gt; share the source code for my blog&lt;/li&gt;
-
-&lt;li&gt;I don&amp;#8217;t have to worry about hosting&lt;/li&gt;
-
-&lt;li&gt;I can use any domain I own&lt;/li&gt;
-
-&lt;li&gt;It provides higher geek factor than having a WP blog&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The cons&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;GitHub crashes every once in a while and maybe GH Pages come down with it&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In the next few days I&amp;#8217;ll try to add the old posts and extend them a bit. I also have a bunch of drafts that I never got around to publish so I&amp;#8217;ll try to finish them too.&lt;/p&gt;</content>
-    </entry>
-    
-    <entry>
-        <title>Ilya Grigorik; Breaking the 1000ms Time to Glass Mobile Barrier</title>
-        <link href="http://blog.orestes.io/archive/2013/04/10/breaking-the-1000ms-time-to-glass-mobile-barrier"/>
-        <updated>2013-04-10T00:00:00+02:00</updated>
-        <id>http://blog.orestes.io/archive/2013/04/10/breaking-the-1000ms-time-to-glass-mobile-barrier</id>
-        <content type="html">&lt;iframe src=&quot;http://www.youtube.com/embed/Il4swGfTOSM?feature=oembed&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;p&gt;Here are &lt;a href=&quot;http://www.youtube.com/watch?v=Il4swGfTOSM&quot; target=&quot;_blank&quot;&gt;the slides from the talk&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;You can read more about &lt;a href=&quot;http://www.appliness.com/ilya-grigorik/&quot; target=&quot;_blank&quot;&gt;Ilya on his interview featured on Applines&lt;/a&gt; a few months ago.&lt;/p&gt;
-</content>
-    </entry>
-    
-    <entry>
-        <title>Creepy streaming</title>
-        <link href="http://blog.orestes.io/archive/2012/07/05/creepy-streaming"/>
-        <updated>2012-07-05T00:00:00+02:00</updated>
-        <id>http://blog.orestes.io/archive/2012/07/05/creepy-streaming</id>
-        <content type="html">&lt;img class=&quot;pic&quot; src=&quot;http://blog.orestes.io/media/2012/07/05/endesa-450x272.png&quot; alt=&quot;&quot; title=&quot;endesa&quot; width=&quot;450&quot; height=&quot;272&quot; /&gt;
-&lt;label&gt;Taking a peek at a player streaming video using low settings looks creepy&lt;/label&gt;
-</content>
-    </entry>
-    
-    <entry>
-        <title>Having lunch at Toyo</title>
-        <link href="http://blog.orestes.io/archive/2012/04/26/having-lunch-at-toyo"/>
-        <updated>2012-04-26T00:00:00+02:00</updated>
-        <id>http://blog.orestes.io/archive/2012/04/26/having-lunch-at-toyo</id>
-        <content type="html">&lt;img src=&quot;http://blog.orestes.io/media/2012-04-26-01.jpg&quot; alt=&quot;Having lunch at Toyo&quot; /&gt;
-&lt;p&gt;I really love this restaurant. It has a classic sushi conveyor belt and is just one block away from the office.
-The owners are actually chinese but their food is amazing! They're so nice and they've even learned our preferences so
-whenever I sit down I get the first Teriyaki Chicken that comes out of the kitchen. We have lunch here almost every week
-and they make us feel really welcomed. I'm going to miss this place when we move to the new office, wherever that may be...&lt;/p&gt;
-&lt;p&gt;If you're ever in Barcelona, check out &lt;a href=&quot;http://www.restaurantetoyo.com/&quot; target=&quot;_blank&quot;&gt;Toyo&lt;/a&gt;, you'll love it'&lt;/p&gt;</content>
-    </entry>
-    
+  <title>{{ site.title }}</title>
+  <link href="{{ site.url }}/atom.xml" rel="self" />
+  <link href="{{ site.url }}" />
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
+  <id>{{ site.url }}</id>
+  <author>
+    <name>{{ site.author }}</name>
+    <email>{{ site.author_email }}</email>
+  </author>
+  {% for post in site.posts %}
+  <entry>
+    <title>{{ post.title }}</title>
+    <link href="{{ site.url }}{{ post.url }}"/>
+    <updated>{{ post.date | date_to_xmlschema }}</updated>
+    <id>{{ site.url}}{{ post.id }}</id>
+    <content type="html">{{ post.content | xml_escape }}</content>
+  </entry>
+  {% endfor %}
 </feed>
