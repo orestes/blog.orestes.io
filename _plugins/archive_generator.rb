@@ -25,7 +25,7 @@ module Jekyll
       archive = {}
       site.posts.each do |post|
         y = post.date.year.to_s
-        m = post.date.month.to_s
+        m = "%02d" % post.date.month.to_i
 
         archive[y] ||= {}
         archive[y][m] ||= []

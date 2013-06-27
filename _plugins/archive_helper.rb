@@ -10,7 +10,9 @@ class Jekyll::Site
 
               posts.reverse.each do |post|
                 y = post.date.year
-                m = post.date.month.to_i
+                m = "%02d" % post.date.month.to_i
+
+                puts m
 
                 if month_index[y].nil?
                   year_index << y
