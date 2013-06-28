@@ -1,7 +1,7 @@
-[blog.orestes.io](ttp://blog.orestes.io)
+[blog.orestes.io](http://blog.orestes.io)
 ===============
 
-This blog makes use of
+Source code for [blog.orestes.io](ttp://blog.orestes.io). This blog makes use of the following technologies:
 
 * Jekyll [(license)](https://raw.github.com/mojombo/jekyll/master/LICENSE)
 * Font Awesome [(license)](http://fortawesome.github.io/Font-Awesome/license/)
