@@ -28,11 +28,15 @@ div.post {
     margin-top: 1em;
 }
 
-div.post > img {
+div.post img {
     border: 1px solid silver;
-    padding: 0.3em;
-    margin: 0.5em 0;
+    float: left;
+    max-width: 150px;
+    border: 1px solid silver;
+    padding: 0.1em;
+    margin: 0 1em 1em 0;
 }
+
 
 div.footer {
     border-top: 1px solid silver;
@@ -48,23 +52,24 @@ div.grid.main {
 
 aside.sidebar {
     padding-left: 1em;
+    margin-top: 6em;
 }
 
 aside.sidebar ul {
-    list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-aside.sidebar {
-    margin-top: 6em;
-}
-aside.sidebar ul ul, aside.sidebar ul.links  {
-    margin-left: 1em;
+aside.sidebar ul.links  {
+    list-style-type: none;
+    margin-left: 0;
     font-weight: normal;
 }
+aside.sidebar ul.links.month  {
+    margin-left: 0.5em;
+}
 
-aside.sidebar ul.year {
+aside.sidebar ul.year > li {
     font-weight: bold;
 }
 
@@ -82,14 +87,6 @@ div.title {
 
 div.post > div.content {
     padding-top: 1em;
-}
-
-div.post img {
-    float: left;
-    max-width: 150px;
-    border: 1px solid silver;
-    padding: 2px;
-    margin-right: 1em;
 }
 
 .clearfix {
