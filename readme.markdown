@@ -8,7 +8,7 @@ This blog makes use of
 * Bootstrap [(license)](https://raw.github.com/twitter/bootstrap/blob/master/LICENSE)
 
 # License
-See [(LICENSE)](https://github.com/orestes/blog.orestes.io/blob/master/LICENSE)
+See [LICENSE](https://github.com/orestes/blog.orestes.io/blob/master/LICENSE)
 
 All the content inside the "assets", "media" and "_posts" is under private copyright Orestes Carracedo and cannot be
 used without written permission.
