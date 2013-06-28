@@ -8,6 +8,7 @@ tag_dir: tag
 permalink: /archive/:year/:month/:day/:title
 
 ga_tracking_code: UA-34829303-1
+ga_domain: blog.orestes.io
 
 url: http://blog.orestes.io
 title: Orestes Carracedo
