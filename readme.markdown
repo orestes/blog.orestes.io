@@ -7,8 +7,8 @@ This blog makes use of
 * Font Awesome [(license)](http://fortawesome.github.io/Font-Awesome/license/)
 * Bootstrap [(license)](https://raw.github.com/twitter/bootstrap/blob/master/LICENSE)
 
-** License **
-See [(LICENSE)](https://github.com/orestes/blog.orestes.io/blob/master/LICENSEw)
+# License
+See [(LICENSE)](https://github.com/orestes/blog.orestes.io/blob/master/LICENSE)
 
 All the content inside the "assets", "media" and "_posts" is under private copyright Orestes Carracedo and cannot be
 used without written permission.
