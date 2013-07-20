@@ -8,7 +8,10 @@ body {
     background-image: url('/assets/grey.png');
 }
 
-.highlight pre {
+div.highlight {
+    background: transparent;
+}
+div.highlight pre {
     border: none;
     background: transparent;
 }
