@@ -6,6 +6,8 @@ html, body {
 body {
     background-image: url('/assets/subtle_grunge.png');
     background-image: url('/assets/grey.png');
+    font-size: 1em;
+    line-height: 1.6em;
 }
 
 div.highlight {
@@ -14,6 +16,9 @@ div.highlight {
 div.highlight pre {
     border: none;
     background: transparent;
+    padding: 1em;
+    border: 1px dashed silver;
+    border-radius: 3px;
 }
 
 a {
