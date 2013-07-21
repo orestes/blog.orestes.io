@@ -1,0 +1,63 @@
+---
+layout: post
+title: Controlling a relay using JavaScript + ActiveX
+Categories: programming
+tags: [relay, activex, javascript, programming, code]
+---
+<p>Recently we got a couple of projects at <strong><a href="http://focusonemotions.com" target="_blank">Focus On
+Emotions</a></strong>, from a company that has a loyalty program card. Among the challenging stuff we did for them
+there was a project for automating the process of the users registering and getting this cards, making it easier and
+more convenient. The final product was a user kiosk with an interactive touch screen a physical keyboard and mouse.
+This project needed a couple of tricky features: <strong>ID verification</strong> and <strong>bank credit
+authorization</strong>. We have two other public kiosk projects for Ajuntament de Barcelona (the city hall)
+which allows citizens to do paperwork, but none of them used any banking data.</p>
+
+<p>A couple of weeks after the project's launch we had gotten many reports of users being disoriented when following
+the process. One of the steps required the users to physically place their ID form on a small flatbed scanner
+for validation. Even though the physical space was an obvious empty box the users didn't realise that was where
+they were supposed to place their ID.</p>
+
+<p>The client asked us to modify the kiosk structure, add a LED stripe around the empty box and have it blink when the
+users got to the ID validation step. We had to give it a little thought before coming up with a solution because we
+had a tricky problem: <strong>hardware access was impossible</strong>. The whole application was written
+in Java, HTML and JavaScript,and it ran as a served web app inside a secured environment using SiteKiosk. This was
+great for pushing software changes to the multiple kiosks installed for the project as well as for interacting with
+the bank's backoffice services in a secured environment (server-side). The manufacturer for the ID scanner had
+provided the dev team with an API that used ActiveX and JavaScript to control their hardware, so we followed that
+idea: we had to develop our own ActiveX control to activate the LED stripe whenever we needed to.</p>
+
+<p>We bought a simple relay board with an USB interface and started working on it. This relay board was great
+because it had two different relays that you could control independently. Each relay had a tiny onboard LED indicating
+its state. You can find it on PCRobot <a href="">here</a>. I got a hold of the specification and wrote a simple
+program to control it over USB by sending the byte-encoded messages for each action (open/close relay 1/2). Once I
+had the small PoC, I converted it to a library and compiled it as an ActiveX. I did this from Windows using the CSC
+tool provided by the .NET framework.<br/>
+<code>C:\Windows\Microsoft.NET\Framework\v2.0.50727\csc.exe /t:library USBLEDControllerLib.cs</code></br>
+This DLL must be registered using <code>regasm</code> to make it available for Internet Explorer<br/>
+<code>C:\Windows\Microsoft.NET\Framework\v2.0.50727\regasm.exe /tlb /codebase USBLEDControllerLib.dll</code>
+</p>
+
+<p>To invoke the ActiveX control we use the full classname, including namespace.</p>
+{% highlight javascript %}
+var controller = new ActiveXObject("FOE.USBLEDControllerLib");
+var version = controller.getFirmwareVersion();
+console.log('Running FOE USB LED Controller version ' + version);
+{% endhighlight %}
+
+<p>A simple ActiveX control will trigger a security warning on IE. We suppressed this warning by implementing
+a few visible COM methods flagged as <code>[Serializable, ComVisible(true)]</code> which come from the
+<code><a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa751977(v=vs.85).aspx">IObjectSafety</a></code>
+interface. This told IE it could trust our library.</p>
+
+<p>The controller for the board had a limited set of functions so we had to extend them for our project. I added
+a couple of threaded functions to start/stop blinking the LEDs synchronously, stopping/starting only one of them
+and have the other synchronize on start, etc... Even though we had very little time and a lot of pressure I think
+it was a fun project.</p>
+
+<p> References:
+<ul>
+    <li>
+        <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa751977(v=vs.85).aspx">Safe Initialization and Scripting for ActiveX Controls</a> on MSDN.
+    </li>
+</ul>
+</p>
