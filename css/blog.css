@@ -41,15 +41,19 @@ div.post {
     margin-top: 2em;
 }
 
-div.post img {
-    border: 1px solid silver;
+div.post img.use-left {
     float: left;
-    max-width: 150px;
-    border: 1px solid silver;
-    padding: 0.1em;
     margin: 0 1em 1em 0;
 }
 
+div.post img.use-right {
+    float: right;
+    margin: 0 0 1em 1em;
+}
+
+div.post img.inside-text {
+    margin-top: 1em;
+}
 
 div.footer {
     text-align: center;
