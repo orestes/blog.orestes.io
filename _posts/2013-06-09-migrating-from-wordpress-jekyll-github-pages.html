@@ -1,16 +1,16 @@
 ---
 layout: post
-categories: [technologies]
-tags: [jekyll, wordpress, github, blog]
+categories: [technologies, code]
+tags: [jekyll, wordpress, github, blog, programming, code, ruby, project]
 title: Migrating from Wordpress to Jekyll on GitHub Pages
 ---
 <p>Besides my writing skills, my problem with blogging was the software I was using, <strong>Wordpress</strong>. I found it slow, heavy and often insecure. I didn’t want my server exploding whenever I got a traffic spike, I didn’t want upgrading my WP modules and being worried about security issues. It was kind of hard to get it to look the way I wanted it. I wrote a custom theme but I wasn’t really satisfied with it, so I bought a one which looked cool, but I still wasn’t happy with my blog because it wasn’t “mine”.</p>
 
-<p>I wanted a static blog website that I could code and style however I wanted. I wouldn’t have to worry about security since it would be static and would have no user input, search or comment features. I didn’t want to give up comments so I checked <strong>Disqus</strong>, whichs a really good commenting platform that you can embed anywhere without having to worry about security or performance issues. Disqus is seamless iframe whith a lot of clever programming inside. <strong>Ben Vinegar</strong>, a front-end engineer at Disqus gave a great talk about it in 2012: <a href="http://www.youtube.com/watch?v=gQCm8VYn93Y">Seamless iframes: The future, today!</a>.</p>
+<p>I wanted a static blog website that I could code and style the way I wanted, without restrictions. I wouldn’t have to worry about security since it would be static and would have no user input, search or comment features. I didn’t want to give up comments so I checked <strong>Disqus</strong>, whichs a really good commenting platform that you can embed anywhere without having to worry about security or performance issues. Disqus is a seamless iframe whith a lot of clever programming inside. <strong>Ben Vinegar</strong>, gave a great talk about it in 2012: <a href="http://www.youtube.com/watch?v=gQCm8VYn93Y">Seamless iframes: The future, today!</a>.</p>
 
-<p>Regarding the traffic spikes and server resources, I decided I’d move the blog out of my lab hosting (which is a tiny virtual machine) into somewhere that could serve static sites without much</p>
+<p>Regarding the traffic spikes and server resources, I decided I’d move the blog out of my lab hosting (which is a tiny virtual machine) into somewhere that could serve static sites and I only had to worry about bandwith costs,</p>
 
-<p>Once I had covered the comments issue, I started researching about scaffolding tools and generators for static websites. I had used stuff like <strong>yeoman</strong> that worked reat for getting something started quickly, but it was more aimed at apps than static websites and I’d still have to do a lot of the work.</p>
+<p>I started researching about scaffolding tools and generators for static websites. I had used stuff like <strong>yeoman</strong> that worked reat for getting something started quickly, but it was more aimed at apps than static websites and I’d still have to do a lot of the work.</p>
 
 <p>Then I found about <strong>GitHub Pages</strong> and <strong>Jekyll</strong>, and they turned out to be the perfect solution for me. <strong>Jekyll</strong> is a blog-aware static website generator written in Ruby by <a href="http://tom.preston-werner.com/"><strong>Tom Preston-Werner</strong></a>. It’s easy to get started with and powerful enough to let you add your own plugins and teach it new tricks. <strong>GitHub Pages</strong> allows you to serve static content from your GitHub repositories without any setup</p>
 
@@ -42,22 +42,22 @@ title: Migrating from Wordpress to Jekyll on GitHub Pages
 
 <h5 id="working_with_jekyll">Working with Jekyll</h5>
 
-<p>You create a new site via <code>jekyll new PATH</code> which creates a bare minimum site config and layouts.</p>
+<p>You create a new site running <code>jekyll new PATH</code> which creates a bare minimum site config and layouts.</p>
 
 <p>To create the extra tag and category index, as well as the archived month pages, I had to extend the same classes: <code>Jekyll::Page</code> and <code>Jekyll:Generator</code>. The method is pretty straightforward:</p>
 
 <ol>
 <li>Create a class that inherits from <code>Jekyll:Page</code></li>
 
-<li>In your page class, implement the <code>initialise</code> method</li>
+<li>In the page class, implement the <code>initialise</code> method</li>
 
-<li>In your <code>initialise</code> method, call <code>self.process(@name)</code> and <code>self.read_yaml</code> to get the contents of your layout</li>
+<li>In the <code>initialise</code> method, call <code>self.process(@name)</code> and <code>self.read_yaml</code> to get the contents of the layout</li>
 
 <li>Add to the <code>site.data</code> Hash any data you want to expose to the page</li>
 
 <li>Create a class that inherits from <code>Jekyll:Generator</code></li>
 
-<li>Implement the <code>generate(site)</code> method which adds instances of your custom page to the <code>site.pages</code> Array</li>
+<li>Implement the <code>generate(site)</code> method which adds instances of the custom page to the <code>site.pages</code> Array</li>
 </ol>
 
 <p>I generated the monthly archive by iterating over the <code>site.posts</code> Array and analysing the dates. To generate the sidebar menu that displays the year/month list I needed to have an index to iterate over, so I coded my plugin <code>archive_helper</code>. What I did was:</p>
@@ -72,17 +72,22 @@ title: Migrating from Wordpress to Jekyll on GitHub Pages
 <li>Added to <code>site.data</code> Hash the indexes created from the posts’ dates.</li>
 </ol>
 
-<p>For the tag and a category pages were already provided in the <a href="http://jekyllrb.com/docs/plugins/">Jekyll plugin docs</a> so I didn’t need to do any extra work.</p>
+<p>The plugins to generate the tag and a category pages were already provided in the <a href="http://jekyllrb.com/docs/plugins/">Jekyll plugin docs</a> so I didn’t need to do any extra work.</p>
 
 <p>You can get the source code for my plugins and all of this blog <a href="https://github.com/orestes/blog.orestes.io">here</a></p>
 
 <h5 id="deploying_the_site">Deploying the site</h5>
 
-<p>The problem I had with my plugins is that GitHub pages builds the Jekyll sites using the <code>--safe</code> switch, which disables the custom plugins. The alternative is to push your source code to the <code>master</code> branch and your generated site files to the <code>gh-pages</code> branch. I didn’t want to do it manually every time I updated the source, so I wrote a little <code>post-commit</code> hook that generates the site, wipes the <code>gh-pages</code> branch and pushes the fresh site to the <code>gh-pages</code> branch.</p>
+<p>The problem I had with my plugins is that GitHub pages builds the Jekyll sites using the <code>--safe</code> switch, which disables them. The alternative is to push your source code to the <code>master</code> branch and your generated site files to the <code>gh-pages</code> branch. I didn’t want to do it manually every time I updated the source, so I wrote a little <code>post-commit</code> hook that generates the site, wipes the <code>gh-pages</code> branch and pushes the freshly generated site to the <code>gh-pages</code> branch.</p>
 
 <h5 id="using_a_custom_domain_name">Using a custom domain name</h5>
 
-<p>By default everything goes in <code>http://username.github.com/repository-name</code>. Having a good grasp of the HTTP protocol is crucial for a web developer, and I think we should also know at least a little about the DNS protocol. I wanted to host my blog under <code>blog.orestes.io</code>, so I got to my DNS panel on my domain registrar, and added a new <code>CNAME</code> DNS entry for <code>orestes.io</code> with the name was <code>blog</code> and the value <code>orestes.github.com</code>. A <strong>CNAME</strong> is a <strong>Canonical Name</strong> entry, which effectively tells DNS clients asking where <code>blog.orestes.io</code> is, to ask instead for <code>orestes.github.io</code>.</p>
+<p>Everything gets served from <code>http://username.github.com/repository-name</code>. Having a good grasp of the HTTP
+protocol is crucial for a web developer, and I think we should also know at least a little about the DNS protocol. I
+wanted to host my blog under <code>blog.orestes.io</code>, so I got to my DNS panel on my domain registrar and added
+a new <code>CNAME</code> DNS entry for <code>orestes.io</code> with the name was <code>blog</code> and the value
+<code>orestes.github.com</code>. A <strong>CNAME</strong> is a <strong>Canonical Name</strong> entry, which tells
+DNS clients asking where <code>blog.orestes.io</code> is, to ask instead for <code>orestes.github.io</code>.</p>
 
 <p>Let’s check what’s going on with my domain name using nslookup.</p>
 
@@ -100,12 +105,11 @@ Address: 103.245.223.196</code></pre>
 
 <p>When you finally get to the HTTP server behind <code>github.map.fastly.net</code>, it checks the HTTP 1.1 “Host” header, which is sent by the browser and will contain the value <code>blog.orestes.io</code>. Then the GH Pages takes a look under the user’s projects and their /CNAME files to check if any of this projects is assigned to this domain. If there is, you get the static site, if there isn’t, a 404 error.</p>
 
-<p>Read more:</p>
-
-<ul>
-<li><a href="http://jekyllrb.com/">Jekyll docs</a></li>
-
-<li><a href="https://help.github.com/categories/20/articles">GitHub Pages help</a></li>
-
-<li><a href="http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html">“Blogging like a Hacker” by Tom Preston-Werner</a>.</li>
+<p>
+    <strong>Links:</strong>
+    <ul>
+        <li><a href="https://github.com/orestes/blog.orestes.io">Source code</a>.</li>
+        <li><a href="http://jekyllrb.com/">Jekyll docs</a>.</li>
+        <li><a href="https://help.github.com/categories/20/articles">GitHub Pages help</a>.</li>
+        <li><a href="http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html">“Blogging like a Hacker”</a> by Tom Preston-Werner.</li>
 </ul>
