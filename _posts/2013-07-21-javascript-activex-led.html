@@ -1,22 +1,21 @@
 ---
 layout: post
 title: Controlling a USB-RLY02 relay module over USB using C#, JavaScript and ActiveX
-categories: [programming, project]
-tags: [relay, csharp, javascript, activex, hardware, programming, code, project, focusonemotions]
+categories: [programming, project, videos]
+tags: [relay, csharp, javascript, activex, hardware, programming, code, project, focusonemotions, video]
 ---
 {% capture media_url %}{{ site.url }}/media/{{ page.date | date: "%Y/%m/%d" }}{% endcapture%}
 <p>It was 2010 when we got some projects at <strong><a href="http://focusonemotions.com" target="_blank">Focus On
 Emotions</a></strong> from <strong>Ikea</strong>. Among the challenging stuff we did for them
 there was a project for automating the process of the users registering for a credit card.
-The final product was a user kiosk with an interactive touch screen a physical keyboard and mouse. This project needed
+The final product was a digital user stall/kiosk with an interactive touch screen a physical keyboard and mouse. This project needed
 a couple of tricky features: <strong>ID verification</strong> and <strong>bank authorization</strong>.
 </p>
 
 <p><img class="img-polaroid" src="{{ media_url }}/16_ikea.jpg" alt=""/></p>
 
-<p>This was not our first rodeo and we had two other public
-<a target="_blank" href="http://w110.bcn.cat/portal/site/Ajuntament/menuitem.38c1cee3a16e78f040f740f7a2ef8a0c/?vgnextoid=0023204c1a071310VgnVCM10000074fea8c0RCRD&vgnextchannel=0023204c1a071310VgnVCM10000074fea8c0RCRD&lang=ca_ES">kiosk projects for <strong>Ajuntament de Barcelona</strong>
-(the city hall)</a> which allow citizens to do paperwork. They were challenging because we had to integrate lots
+<p>This was not our first rodeo and we had another public
+<a target="_blank" href="http://w110.bcn.cat/portal/site/Ajuntament/menuitem.38c1cee3a16e78f040f740f7a2ef8a0c/?vgnextoid=0023204c1a071310VgnVCM10000074fea8c0RCRD&vgnextchannel=0023204c1a071310VgnVCM10000074fea8c0RCRD&lang=ca_ES">kiosk/stall project for <strong>the city hall, Ajuntament de Barcelona</strong></a> which allow citizens to do paperwork. They were challenging because we had to integrate lots
 of different providers, but we didn't manage any banking data so this was new to us. These projects had been running
 smoothly for years and we've got some recognition from them.
 <img class="img-polaroid use-left inside-text" src="{{ media_url }}/quioscmp.jpg" width="23%"/>
@@ -40,13 +39,13 @@ idea: we had to develop our own ActiveX control to activate the LED stripe whene
 <p>We bought a simple relay board with an USB interface and started working on it. This relay board was great
 because it had two different relays that you could control independently. Each relay had a tiny onboard LED indicating
 its state. You can find it on <strong>RobotShop</strong>,
-<a href="http://www.robotshop.com/productinfo.aspx?pc=RB-Dev-35">here</a>.
+<a target="_blank" href="http://www.robotshop.com/productinfo.aspx?pc=RB-Dev-35">here</a>.
 </p>
 
 <p><img class="img-polaroid use-right" src="http://www.robotshop.com/content/images/devantech-2-channel-usb-relay-large.jpg" width="23%" alt=""/></p>
 
 <p>
-I got a hold of the <a target="_blank" href="http://www.robotshop.com/content/PDF/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">controller's specification</a> and wrote a simple
+I got a hold of the <a target="_blank" href="http://www.robotshop.com/content/PDF/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">controller's specification</a> [<a href="{{ media_url }}/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">mirror</a>] and wrote a simple
 program to control it over USB by sending the byte-encoded messages for each action (open/close relay 1/2). It consisted
 of a minimal Windows Forms interface with a few buttons to open/close the USB port and switching on/off the relays.
 When I was sure I could make it work, I wrote a small function library and compiled it as an ActiveX using the
@@ -74,15 +73,15 @@ and have the other synchronize on start, etc... Even though we had very little t
 it was a fun project. You can see the PoC in the video below. You click a button on a webpage and a LED lights up.
 Neat! I love the clicking sound from the relays, so mechanical :D</p>
 
-<p><iframe width="560" height="315" src="//www.youtube.com/embed/4uKpX1BUNq4" frameborder="0" allowfullscreen></iframe></p>
+<p><iframe style="width: 100%" width="100%" height="315" src="//www.youtube.com/embed/4uKpX1BUNq4" frameborder="0" allowfullscreen></iframe></p>
 
-<p> References:
-<ul>
-    <li>
-        <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa751977(v=vs.85).aspx">Safe Initialization and Scripting for ActiveX Controls</a> on <strong>MSDN</strong>.
-    </li>
-    <li><a target="_blank" href="http://focusonemotions.com/web/en/projects.html/sector_publico_sectores">Public Sector clients</a> at <strong>Focus On Emotions</strong></li>
-    <li><a target="_blank" href="http://www.robotshop.com/productinfo.aspx?pc=RB-Dev-35">Devantech 2 Channel USB Relay</a> at <strong>RobotShop</strong>.</li>
-    <li><a target="_blank" href="http://www.robotshop.com/content/PDF/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">USB-RLY02 module specification</a> at <strong>RobotShop</strong>. [<a href="{{ media_url }}/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">mirror</a>]</li>
-</ul>
+<p>
+    <strong>Links</strong>:
+    <ul>
+        <li><a target="_blank" href="http://w110.bcn.cat/portal/site/Ajuntament/menuitem.38c1cee3a16e78f040f740f7a2ef8a0c/?vgnextoid=0023204c1a071310VgnVCM10000074fea8c0RCRD&vgnextchannel=0023204c1a071310VgnVCM10000074fea8c0RCRD&lang=en_GB">Procedures and services stalls</a> at <strong>BCN.cat</strong></li>
+        <li><a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa751977(v=vs.85).aspx">Safe Initialization and Scripting for ActiveX Controls</a> on <strong>MSDN</strong>.</li>
+        <li><a target="_blank" href="http://focusonemotions.com/web/en/projects.html/sector_publico_sectores">Public Sector clients</a> at <strong>Focus On Emotions</strong></li>
+        <li><a target="_blank" href="http://www.robotshop.com/productinfo.aspx?pc=RB-Dev-35">Devantech 2 Channel USB Relay</a> at <strong>RobotShop</strong>.</li>
+        <li><a target="_blank" href="http://www.robotshop.com/content/PDF/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">USB-RLY02 module specification</a> at <strong>RobotShop</strong>. [<a href="{{ media_url }}/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">mirror</a>]</li>
+    </ul>
 </p>
