@@ -1,0 +1,7 @@
+tags
+
+conference video
+talk, conference, name, name + edition, video, playlist?, technology, speaker
+
+meetup video
+talk, meetup, meetup name, video, playlist?, technology, speaker
