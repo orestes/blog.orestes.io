@@ -55,6 +55,12 @@ div.post img.inside-text {
     margin-top: 1em;
 }
 
+div.post p.update {
+    color: black;
+    border: 1px dashed silver;
+    padding: 1em;
+}
+
 div.footer {
     text-align: center;
     padding: 1em;
