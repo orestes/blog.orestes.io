@@ -126,6 +126,14 @@ div.post iframe {
     border: none;
     width: 100%;
     min-width: 320px;
-    max-width: 680px;
+    max-width: 710px;
     min-height: 320px;
+}
+
+div.post img {
+    max-width: 710px;
+}
+
+div.post img.img-polaroid {
+    max-width: 690px;
 }
