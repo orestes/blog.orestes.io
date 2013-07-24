@@ -48,11 +48,12 @@ its state. You can find it on <strong>RobotShop</strong>,
 I got a hold of the <a target="_blank" href="http://www.robotshop.com/content/PDF/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">controller's specification</a> [<a href="{{ media_url }}/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">mirror</a>] and wrote a simple
 program to control it over USB by sending the byte-encoded messages for each action (open/close relay 1/2). It consisted
 of a minimal Windows Forms interface with a few buttons to open/close the USB port and switching on/off the relays.
-When I was sure I could make it work, I wrote a small function library and compiled it as an ActiveX using the
-<code>csc</code> tool:<br/>
-<code>C:\Windows\Microsoft.NET\Framework\v2.0.50727\csc.exe /t:library USBLEDControllerLib.cs</code></br>
-To make it available for Internet Explorer, the DLL had to be registered using <code>regasm</code>:<br/>
-<code>C:\Windows\Microsoft.NET\Framework\v2.0.50727\regasm.exe /tlb /codebase USBLEDControllerLib.dll</code>
+When I was sure I could make it work, I wrote a small function library and compiled it as an ActiveX:<br/>
+<code>csc /t:library USBLEDControllerLib.cs</code></br>
+To make it available for Internet Explorer, the DLL had to be registered:<br/>
+<code>regasm /tlb /codebase USBLEDControllerLib.dll</code></br>
+Both <code>regasm</code> and <code>csc</code> are provided by .NET Framework 2. in my case, It was already installed on
+<code>%WINDIR%\Microsoft.NET\Framework</code>
 </p>
 
 <p>To invoke the ActiveX control we use the full classname, including namespace.</p>
