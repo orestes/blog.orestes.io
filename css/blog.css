@@ -138,6 +138,13 @@ div.post img.img-polaroid {
     max-width: 98%;
 }
 
+.archive .year .title {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-weight: bold;
+    font-size: 150%;
+}
+
 code {
     white-space: pre-wrap;
 }

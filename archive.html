@@ -1,0 +1,28 @@
+---
+layout: page
+title: Full archive - Orestes Carracedo
+---
+<h3>Post archive</h3>
+<article class="archive">
+    {% for year in site.year_index %}
+    <div class="year">
+        <div class="title">{{ year }}</div>
+        <ul class="posts">
+        {% for month in site.month_index[year] %}
+        {% capture ym %}{{ year }}/{{ month }}{% endcapture%}
+
+        <!--<div class="month">{{ year }} / {{ month | month_name }}</div>-->
+        {% for post in site.posts %}
+        {% capture pym %}{{ post.date | date: "%Y/%m" }}{% endcapture%}
+        {% if pym == ym %}
+        <li>
+            <span class="date">{{ post.date | date: "%Y/%m/%d" }}</span>
+            <span><a href="{{ post.url }}">{{ post.title }}</a></span>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</article>
