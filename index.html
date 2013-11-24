@@ -1,0 +1,13 @@
+---
+layout: page
+title: Orestes Carracedo
+---
+<article class="posts">
+    {% assign show_comment_count = true %}
+    {% for post in paginator.posts %}
+    {% assign content = post.content %}
+    {% include post.html %}
+    {% endfor %}
+</article> <!-- /posts -->
+
+{% include pagination.html %}

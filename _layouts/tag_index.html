@@ -1,0 +1,13 @@
+---
+layout: page
+title: Tag / Orestes Carracedo
+---
+<h4>{{ page.post_count }} posts tagged as <em>{{ page.tag }}</em>.</h4>
+
+<article class="posts">
+    {% assign show_comment_count = true %}
+    {% for post in site.tags[page.tag] %}
+    {% assign content = post.content %}
+    {% include post.html %}
+    {% endfor %}
+</article> <!-- /posts -->

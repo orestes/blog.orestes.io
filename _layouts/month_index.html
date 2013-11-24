@@ -1,0 +1,14 @@
+---
+layout: page
+title: Archive / Orestes Carracedo
+---
+
+<h4>{{ page.post_count }} post(s) archived on {{ page.month | month_name }} {{ page.year }}.</h4>
+
+<article class="posts">
+    {% assign show_comment_count = true %}
+    {% for post in page.archive %}
+    {% assign content = post.content %}
+    {% include post.html %}
+    {% endfor %}
+</article> <!-- /posts -->

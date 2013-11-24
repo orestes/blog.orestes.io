@@ -1,0 +1,35 @@
+---
+layout: main
+---
+<div class="grid main">
+    <div class="row-fluid">
+        <div class="span9">
+            {% include header.html %}
+
+            <!-- page-content-->
+            {{content}}
+            <!-- /page-content-->
+
+        </div>
+
+        <aside class="span3 sidebar">
+            {% include sidebar.html %}
+        </aside>
+    </div>
+</div>
+
+<div class="grid main">
+    <div class="row-fluid">
+        <div class="span9 footer">{% include footer.html %}</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var disqus_shortname = 'orestes';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
