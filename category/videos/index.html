@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>Category / Orestes Carracedo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="" />
+    <link href="http://feeds.feedburner.com/orestes/blog" rel="alternate" title="Orestes Carracedo" type="application/atom+xml" />
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/css/blog.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/css/syntax.css" media="all" />
+</head>
+<body>
+
+<!-- content -->
+    <div class="grid main">
+    <div class="row-fluid">
+        <div class="span9">
+            <!-- header -->
+<div class="header">
+    <h2 style="margin-bottom: 0px"><a href="/">Orestes Carracedo</a></h2>
+    <h6 style="margin-top: 0px">Scrum Master, PHP Ninja, cat owner</h6>
+</div>
+<!-- / header -->
+
+
+            <!-- page-content-->
+            <h4>3 posts archived under <em>videos</em>.</h4>
+
+<!-- posts -->
+<article class="posts">
+    
+    
+    
+    <!-- post -->
+<div class="post">
+    <div class="title"><a href="/archive/2013/07/21/javascript-activex-led">Controlling a USB-RLY02 relay module over USB using C#, JavaScript and ActiveX</a></div>
+    <div class="date"><i class="icon-calendar-empty"></i> 21 July 2013</div>
+    <div class="content">
+<p>It was 2010 when we got some projects at <strong><a href="http://focusonemotions.com" target="_blank">Focus On
+Emotions</a></strong> from <strong>Ikea</strong>. Among the challenging stuff we did for them
+there was a project for automating the process of the users registering for a credit card.
+The final product was a digital user stall/kiosk with an interactive touch screen a physical keyboard and mouse. This project needed
+a couple of tricky features: <strong>ID verification</strong> and <strong>bank authorization</strong>.
+</p>
+
+<p><img class="img-polaroid" src="/media/2013/07/21/16_ikea.jpg" alt=""/></p>
+
+<p>This was not our first rodeo and we had another public
+<a target="_blank" href="http://w110.bcn.cat/portal/site/Ajuntament/menuitem.38c1cee3a16e78f040f740f7a2ef8a0c/?vgnextoid=0023204c1a071310VgnVCM10000074fea8c0RCRD&vgnextchannel=0023204c1a071310VgnVCM10000074fea8c0RCRD&lang=ca_ES">kiosk/stall project for <strong>the city hall, Ajuntament de Barcelona</strong></a> which allow citizens to do paperwork. They were challenging because we had to integrate lots
+of different providers, but we didn't manage any banking data so this was new to us. These projects had been running
+smoothly for years and we've got some recognition from them.
+<img class="img-polaroid use-left inside-text" src="/media/2013/07/21/quioscmp.jpg" width="23%"/>
+</p>
+
+<p>A couple of weeks after the project's launch we had gotten many reports of users being disoriented when following
+the process. One of the steps required the users to physically place their ID form on a small flatbed scanner
+for validation. Even though the physical space was an obvious empty box the users didn't realise that was where
+they were supposed to place their ID.</p>
+
+<p>The client asked us to modify the kiosk structure, add a LED stripe around the empty box and have it blink when the
+users got to the ID validation step. We had to give it a little thought before coming up with a solution because we
+had a tricky problem: <strong>hardware access was impossible</strong>. The whole application was written
+in Java, HTML and JavaScript,and it ran as a served web app inside a secured environment using
+<a target="_blank" href="http://www.sitekiosk.com/">SiteKiosk</a>. This was
+great for pushing software changes to the multiple kiosks installed for the project as well as for interacting with
+the bank's backoffice services in a secured environment (server-side). The manufacturer for the ID scanner had
+provided the dev team with an API that used ActiveX and JavaScript to control their hardware, so we followed that
+idea: we had to develop our own ActiveX control to activate the LED stripe whenever we needed to.</p>
+
+<p>We bought a simple relay board with an USB interface and started working on it. This relay board was great
+because it had two different relays that you could control independently. Each relay had a tiny onboard LED indicating
+its state. You can find it on <strong>RobotShop</strong>,
+<a target="_blank" href="http://www.robotshop.com/productinfo.aspx?pc=RB-Dev-35">here</a>.
+</p>
+
+<p><img class="img-polaroid use-right" src="http://www.robotshop.com/content/images/devantech-2-channel-usb-relay-large.jpg" width="23%" alt=""/></p>
+
+<p>
+I got a hold of the <a target="_blank" href="http://www.robotshop.com/content/PDF/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">controller's specification</a> [<a href="/media/2013/07/21/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">mirror</a>] and wrote a simple
+program to control it over USB by sending the byte-encoded messages for each action (open/close relay 1/2). It consisted
+of a minimal Windows Forms interface with a few buttons to open/close the USB port and switching on/off the relays.
+When I was sure I could make it work, I wrote a small function library and compiled it as an ActiveX:<br/>
+<code>csc /t:library USBLEDControllerLib.cs</code></br>
+To make it available for Internet Explorer, the DLL had to be registered:<br/>
+<code>regasm /tlb /codebase USBLEDControllerLib.dll</code></br>
+Both <code>regasm</code> and <code>csc</code> are provided by .NET Framework 2. in my case, It was already installed on
+<code>%WINDIR%\Microsoft.NET\Framework</code>
+</p>
+
+<p>To invoke the ActiveX control we use the full classname, including namespace.</p>
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">controller</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ActiveXObject</span><span class="p">(</span><span class="s2">&quot;FOE.USBLEDControllerLib&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">version</span> <span class="o">=</span> <span class="nx">controller</span><span class="p">.</span><span class="nx">getFirmwareVersion</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Running FOE USB LED Controller version &#39;</span> <span class="o">+</span> <span class="nx">version</span><span class="p">);</span>
+</code></pre></div>
+
+<p>The simple ActiveX control would trigger a security warning on IE. We suppressed this warning by implementing
+a few visible COM methods flagged as <code>[Serializable, ComVisible(true)]</code> which come from the
+<code><a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa751977(v=vs.85).aspx">IObjectSafety</a></code>
+interface. This told IE it could trust our library.</p>
+
+<p>The controller for the board had a limited set of functions so we had to extend them for our project. I added
+a couple of threaded functions to start/stop blinking the LEDs synchronously, stopping/starting only one of them
+and have the other synchronize on start, etc... Even though we had very little time and a lot of pressure I think
+it was a fun project. You can see the PoC in the video below. You click a button on a webpage and a LED lights up.
+Neat! I love the clicking sound from the relays, so mechanical :D</p>
+
+<p><iframe style="width: 100%" width="100%" height="315" src="http://www.youtube.com/embed/4uKpX1BUNq4" frameborder="0" allowfullscreen></iframe></p>
+
+<p>
+    <strong>Links</strong>:
+    <ul>
+        <li><a target="_blank" href="http://w110.bcn.cat/portal/site/Ajuntament/menuitem.38c1cee3a16e78f040f740f7a2ef8a0c/?vgnextoid=0023204c1a071310VgnVCM10000074fea8c0RCRD&vgnextchannel=0023204c1a071310VgnVCM10000074fea8c0RCRD&lang=en_GB">Procedures and services stalls</a> at <strong>BCN.cat</strong></li>
+        <li><a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa751977(v=vs.85).aspx">Safe Initialization and Scripting for ActiveX Controls</a> on <strong>MSDN</strong>.</li>
+        <li><a target="_blank" href="http://focusonemotions.com/web/en/projects.html/sector_publico_sectores">Public Sector clients</a> at <strong>Focus On Emotions</strong></li>
+        <li><a target="_blank" href="http://www.robotshop.com/productinfo.aspx?pc=RB-Dev-35">Devantech 2 Channel USB Relay</a> at <strong>RobotShop</strong>.</li>
+        <li><a target="_blank" href="http://www.robotshop.com/content/PDF/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">USB-RLY02 module specification</a> at <strong>RobotShop</strong>. [<a href="/media/2013/07/21/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">mirror</a>]</li>
+    </ul>
+</p></div>
+    <div class="categories clearfix"><i class="icon-folder-close"></i> Categories:  <a href="/category/programming">programming</a>  <a href="/category/project">project</a>  <a href="/category/videos">videos</a> </div>
+    <div class="tags"><i class="icon-tag"></i> Tags:  <a href="/tag/relay">relay</a>  <a href="/tag/csharp">csharp</a>  <a href="/tag/javascript">javascript</a>  <a href="/tag/activex">activex</a>  <a href="/tag/hardware">hardware</a>  <a href="/tag/programming">programming</a>  <a href="/tag/code">code</a>  <a href="/tag/project">project</a>  <a href="/tag/focusonemotions">focusonemotions</a>  <a href="/tag/video">video</a> </div>
+    
+    <div class="comments"><i class="icon-comment-alt"></i> Comments: <a href="/archive/2013/07/21/javascript-activex-led#disqus_thread">--</a></div>
+    
+</div>
+<!-- /post -->
+
+    
+    
+    <!-- post -->
+<div class="post">
+    <div class="title"><a href="/archive/2012/12/10/what-is-niantic-project">What is "Niantic Project"?</a></div>
+    <div class="date"><i class="icon-calendar-empty"></i> 10 December 2012</div>
+    <div class="content">
+
+<p><iframe style="width: 100%" width="100%" height="315" src="http://www.youtube.com/embed/Ss-Z-QjFUio" frameborder="0" allowfullscreen></iframe></p>
+
+<p class="update">This was posted about a month after the launch of <a href="http://ingress.com" target="_blank">Ingress</a>, an
+Augmented Reality game by Google. In the beginning you could only be invited by someone working on the game, so
+we had to post ingress stories, artwork, articles, whatever we could to get attention from them and receive an
+invitation to play. Today is much easier to get invited,
+you can just go to <a href="http://ingress.com" target="_blank">ingress.com</a> and request an invitation.
+It's really fun!</p>
+
+<p>Ok, I have to tell you about this. I was looking for information about "Ingress" which is some kind of game a few
+people are playing but nobody seems to know how to get access to. I was browsing around and found out about something
+called "Niantic Project". Apparently there's something big going on and only a handful of people and aware of it,
+the ones playing Ingress. </p>
+<p>I found a few cool pictures while googling around and I wanted to save some for later, but I accidentally saved this
+one as a .html file and that's when things got weird.</p>
+
+<p><img class="img-polaroid" src="/media/2012/12/10/niantic-930x454.jpg" alt=""/></p>
+
+<p><strong>Try and do it yourself.</strong> Save this image to your local disk, and rename it to from <code>.jpg</code>
+to <code>.html</code>. When you open it in your browser, it will look almost the same, but you'll notice that your
+browser's background is now black, and the image has a weird green border around it, something it didn't have before.
+If you move your mouse over the image, you're going to find a mysterious text that leads to a strange website. I don't
+know who exactly created that webpage, but there's a ton of info on there.</p>
+
+<p>Why whould somedy hide something inside an image?<br/>
+What are they hiding from us?<br/>
+What is "Niantic Project"?</p>
+
+<p>
+    <strong>Links:</strong>
+    <ul>
+        <li><a target="_blank" href="http://www.nianticproject.com/">Niantic Project</a></li>
+        <li><a target="_blank" href="http://ingress.com">Ingress</a></li>
+    </ul>
+</p></div>
+    <div class="categories clearfix"><i class="icon-folder-close"></i> Categories:  <a href="/category/games">games</a>  <a href="/category/videos">videos</a> </div>
+    <div class="tags"><i class="icon-tag"></i> Tags:  <a href="/tag/ingressinvite">ingressinvite</a>  <a href="/tag/ingresss">ingresss</a>  <a href="/tag/game">game</a>  <a href="/tag/niantic">niantic</a>  <a href="/tag/video">video</a> </div>
+    
+    <div class="comments"><i class="icon-comment-alt"></i> Comments: <a href="/archive/2012/12/10/what-is-niantic-project#disqus_thread">--</a></div>
+    
+</div>
+<!-- /post -->
+
+    
+    
+    <!-- post -->
+<div class="post">
+    <div class="title"><a href="/archive/2012/11/21/html5devconf-2012-playlist">HTML5DevConf 2012 playlist</a></div>
+    <div class="date"><i class="icon-calendar-empty"></i> 21 November 2012</div>
+    <div class="content"><p><iframe style="width: 100%" width="100%" height="315" src="http://www.youtube.com/embed/gQCm8VYn93Y" frameborder="0" allowfullscreen></iframe></p>
+<p><strong><a href="http://benv.ca/" target="_blank">Ben Vinegar</a></strong>'s talk <em>Seamless iFrames: The Future, Today!</em> was very interesting.</p>
+<p class="update">This was a WordPress blog until I switched to <strong>Jekyll </strong> and started using <strong>Disqus</strong> for the comments and I must say I love it.</p>
+<p>
+<strong>Link</strong>: <a href="http://www.youtube.com/playlist?list=PLAIXSzgkhDs7gu24tYyS432v4AGZwPc8I" target="_blank">HTML5DevConf 2012 playlist</a> on <strong>YouTube</strong> (60 videos, 30 hours).<br/>
+<strong>Via</strong>: <a href="http://html5weekly.com/" target="_blank">HTML5 Weekly</a>
+</p>
+</div>
+    <div class="categories clearfix"><i class="icon-folder-close"></i> Categories:  <a href="/category/talks">talks</a>  <a href="/category/conferences">conferences</a>  <a href="/category/videos">videos</a>  <a href="/category/playlists">playlists</a> </div>
+    <div class="tags"><i class="icon-tag"></i> Tags:  <a href="/tag/talk">talk</a>  <a href="/tag/conference">conference</a>  <a href="/tag/html5devconf">html5devconf</a>  <a href="/tag/html5devconf%202012">html5devconf 2012</a>  <a href="/tag/video">video</a>  <a href="/tag/playlist">playlist</a>  <a href="/tag/html5">html5</a>  <a href="/tag/ben%20vinegar">ben vinegar</a> </div>
+    
+    <div class="comments"><i class="icon-comment-alt"></i> Comments: <a href="/archive/2012/11/21/html5devconf-2012-playlist#disqus_thread">--</a></div>
+    
+</div>
+<!-- /post -->
+
+    
+</article>
+<!-- /posts -->
+
+            <!-- /page-content-->
+
+        </div>
+
+        <aside class="span3 sidebar">
+            <!-- sidebar -->
+<h5>About me</h5>
+<ul class="links">
+    <li style="margin-left: -5px"><img src="http://orestescarracedo.com/favicon.ico" alt=""/> <a target="_blank" href="http://orestescarracedo.com">My homepage</a></li>
+    <li><i class="icon-rss"></i> <a target="_blank" href="http://feeds.feedburner.com/orestes/blog">Subscribe</a></li>
+</ul>
+
+<h5>Social</h5>
+<ul class="links">
+    <li><i class="icon-twitter"></i> <a target="_blank" href="http://twitter.com/OrestesCA">Twitter</a></li>
+    <li><i class="icon-github"></i> <a target="_blank" href="https://github.com/orestes">GitHub</a></li>
+    <li><i class="icon-google-plus"></i> <a target="_blank" href="https://plus.google.com/u/0/101089646875098775879/posts">Google +</a></li>
+    <li><i class="icon-linkedin"></i> <a target="_blank" href="http://es.linkedin.com/in/orestesca">LinkedIn</a></li>
+</ul>
+
+<h5><i class="icon-calendar"></i>&nbsp;&nbsp;Archive</h5>
+<ul class="links year">
+    
+    <li class="title">2013</li>
+    <li>
+        <ul class="links month">
+            
+            <li>(1) <a href="/archive/2013/07/">July</a></li>
+            
+            <li>(1) <a href="/archive/2013/06/">June</a></li>
+            
+            <li>(1) <a href="/archive/2013/04/">April</a></li>
+            
+        </ul>
+    </li>
+    
+    <li class="title">2012</li>
+    <li>
+        <ul class="links month">
+            
+            <li>(2) <a href="/archive/2012/12/">December</a></li>
+            
+            <li>(4) <a href="/archive/2012/11/">November</a></li>
+            
+            <li>(1) <a href="/archive/2012/07/">July</a></li>
+            
+            <li>(1) <a href="/archive/2012/06/">June</a></li>
+            
+            <li>(1) <a href="/archive/2012/04/">April</a></li>
+            
+        </ul>
+    </li>
+    
+    <li class="title">2011</li>
+    <li>
+        <ul class="links month">
+            
+            <li>(1) <a href="/archive/2011/12/">December</a></li>
+            
+        </ul>
+    </li>
+    
+</ul>
+<!-- /sidebar -->
+
+        </aside>
+    </div>
+</div>
+
+<div class="grid main">
+    <div class="row-fluid">
+        <div class="span9 footer"><!-- footer -->
+© 2010 - 2013 Orestes Carracedo. <a href="http://github.com/orestes/blog.orestes.io">Source code</a>.<br/>
+All content is under <a href="/LICENSE">MIT License</a> unless otherwise specified.
+<!-- /footer -->
+</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var disqus_shortname = 'orestes';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<!-- /content -->
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34829303-1']);
+    _gaq.push(['_setDomainName', 'blog.orestes.io']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>Tag / Orestes Carracedo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="" />
+    <link href="http://feeds.feedburner.com/orestes/blog" rel="alternate" title="Orestes Carracedo" type="application/atom+xml" />
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/css/blog.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/css/syntax.css" media="all" />
+</head>
+<body>
+
+<!-- content -->
+    <div class="grid main">
+    <div class="row-fluid">
+        <div class="span9">
+            <!-- header -->
+<div class="header">
+    <h2 style="margin-bottom: 0px"><a href="/">Orestes Carracedo</a></h2>
+    <h6 style="margin-top: 0px">Scrum Master, PHP Ninja, cat owner</h6>
+</div>
+<!-- / header -->
+
+
+            <!-- page-content-->
+            <h4>4 posts tagged as <em>programming</em>.</h4>
+
+<article class="posts">
+    
+    
+    
+    <!-- post -->
+<div class="post">
+    <div class="title"><a href="/archive/2013/07/21/javascript-activex-led">Controlling a USB-RLY02 relay module over USB using C#, JavaScript and ActiveX</a></div>
+    <div class="date"><i class="icon-calendar-empty"></i> 21 July 2013</div>
+    <div class="content">
+<p>It was 2010 when we got some projects at <strong><a href="http://focusonemotions.com" target="_blank">Focus On
+Emotions</a></strong> from <strong>Ikea</strong>. Among the challenging stuff we did for them
+there was a project for automating the process of the users registering for a credit card.
+The final product was a digital user stall/kiosk with an interactive touch screen a physical keyboard and mouse. This project needed
+a couple of tricky features: <strong>ID verification</strong> and <strong>bank authorization</strong>.
+</p>
+
+<p><img class="img-polaroid" src="/media/2013/07/21/16_ikea.jpg" alt=""/></p>
+
+<p>This was not our first rodeo and we had another public
+<a target="_blank" href="http://w110.bcn.cat/portal/site/Ajuntament/menuitem.38c1cee3a16e78f040f740f7a2ef8a0c/?vgnextoid=0023204c1a071310VgnVCM10000074fea8c0RCRD&vgnextchannel=0023204c1a071310VgnVCM10000074fea8c0RCRD&lang=ca_ES">kiosk/stall project for <strong>the city hall, Ajuntament de Barcelona</strong></a> which allow citizens to do paperwork. They were challenging because we had to integrate lots
+of different providers, but we didn't manage any banking data so this was new to us. These projects had been running
+smoothly for years and we've got some recognition from them.
+<img class="img-polaroid use-left inside-text" src="/media/2013/07/21/quioscmp.jpg" width="23%"/>
+</p>
+
+<p>A couple of weeks after the project's launch we had gotten many reports of users being disoriented when following
+the process. One of the steps required the users to physically place their ID form on a small flatbed scanner
+for validation. Even though the physical space was an obvious empty box the users didn't realise that was where
+they were supposed to place their ID.</p>
+
+<p>The client asked us to modify the kiosk structure, add a LED stripe around the empty box and have it blink when the
+users got to the ID validation step. We had to give it a little thought before coming up with a solution because we
+had a tricky problem: <strong>hardware access was impossible</strong>. The whole application was written
+in Java, HTML and JavaScript,and it ran as a served web app inside a secured environment using
+<a target="_blank" href="http://www.sitekiosk.com/">SiteKiosk</a>. This was
+great for pushing software changes to the multiple kiosks installed for the project as well as for interacting with
+the bank's backoffice services in a secured environment (server-side). The manufacturer for the ID scanner had
+provided the dev team with an API that used ActiveX and JavaScript to control their hardware, so we followed that
+idea: we had to develop our own ActiveX control to activate the LED stripe whenever we needed to.</p>
+
+<p>We bought a simple relay board with an USB interface and started working on it. This relay board was great
+because it had two different relays that you could control independently. Each relay had a tiny onboard LED indicating
+its state. You can find it on <strong>RobotShop</strong>,
+<a target="_blank" href="http://www.robotshop.com/productinfo.aspx?pc=RB-Dev-35">here</a>.
+</p>
+
+<p><img class="img-polaroid use-right" src="http://www.robotshop.com/content/images/devantech-2-channel-usb-relay-large.jpg" width="23%" alt=""/></p>
+
+<p>
+I got a hold of the <a target="_blank" href="http://www.robotshop.com/content/PDF/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">controller's specification</a> [<a href="/media/2013/07/21/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">mirror</a>] and wrote a simple
+program to control it over USB by sending the byte-encoded messages for each action (open/close relay 1/2). It consisted
+of a minimal Windows Forms interface with a few buttons to open/close the USB port and switching on/off the relays.
+When I was sure I could make it work, I wrote a small function library and compiled it as an ActiveX:<br/>
+<code>csc /t:library USBLEDControllerLib.cs</code></br>
+To make it available for Internet Explorer, the DLL had to be registered:<br/>
+<code>regasm /tlb /codebase USBLEDControllerLib.dll</code></br>
+Both <code>regasm</code> and <code>csc</code> are provided by .NET Framework 2. in my case, It was already installed on
+<code>%WINDIR%\Microsoft.NET\Framework</code>
+</p>
+
+<p>To invoke the ActiveX control we use the full classname, including namespace.</p>
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">controller</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ActiveXObject</span><span class="p">(</span><span class="s2">&quot;FOE.USBLEDControllerLib&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">version</span> <span class="o">=</span> <span class="nx">controller</span><span class="p">.</span><span class="nx">getFirmwareVersion</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Running FOE USB LED Controller version &#39;</span> <span class="o">+</span> <span class="nx">version</span><span class="p">);</span>
+</code></pre></div>
+
+<p>The simple ActiveX control would trigger a security warning on IE. We suppressed this warning by implementing
+a few visible COM methods flagged as <code>[Serializable, ComVisible(true)]</code> which come from the
+<code><a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa751977(v=vs.85).aspx">IObjectSafety</a></code>
+interface. This told IE it could trust our library.</p>
+
+<p>The controller for the board had a limited set of functions so we had to extend them for our project. I added
+a couple of threaded functions to start/stop blinking the LEDs synchronously, stopping/starting only one of them
+and have the other synchronize on start, etc... Even though we had very little time and a lot of pressure I think
+it was a fun project. You can see the PoC in the video below. You click a button on a webpage and a LED lights up.
+Neat! I love the clicking sound from the relays, so mechanical :D</p>
+
+<p><iframe style="width: 100%" width="100%" height="315" src="http://www.youtube.com/embed/4uKpX1BUNq4" frameborder="0" allowfullscreen></iframe></p>
+
+<p>
+    <strong>Links</strong>:
+    <ul>
+        <li><a target="_blank" href="http://w110.bcn.cat/portal/site/Ajuntament/menuitem.38c1cee3a16e78f040f740f7a2ef8a0c/?vgnextoid=0023204c1a071310VgnVCM10000074fea8c0RCRD&vgnextchannel=0023204c1a071310VgnVCM10000074fea8c0RCRD&lang=en_GB">Procedures and services stalls</a> at <strong>BCN.cat</strong></li>
+        <li><a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa751977(v=vs.85).aspx">Safe Initialization and Scripting for ActiveX Controls</a> on <strong>MSDN</strong>.</li>
+        <li><a target="_blank" href="http://focusonemotions.com/web/en/projects.html/sector_publico_sectores">Public Sector clients</a> at <strong>Focus On Emotions</strong></li>
+        <li><a target="_blank" href="http://www.robotshop.com/productinfo.aspx?pc=RB-Dev-35">Devantech 2 Channel USB Relay</a> at <strong>RobotShop</strong>.</li>
+        <li><a target="_blank" href="http://www.robotshop.com/content/PDF/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">USB-RLY02 module specification</a> at <strong>RobotShop</strong>. [<a href="/media/2013/07/21/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">mirror</a>]</li>
+    </ul>
+</p></div>
+    <div class="categories clearfix"><i class="icon-folder-close"></i> Categories:  <a href="/category/programming">programming</a>  <a href="/category/project">project</a>  <a href="/category/videos">videos</a> </div>
+    <div class="tags"><i class="icon-tag"></i> Tags:  <a href="/tag/relay">relay</a>  <a href="/tag/csharp">csharp</a>  <a href="/tag/javascript">javascript</a>  <a href="/tag/activex">activex</a>  <a href="/tag/hardware">hardware</a>  <a href="/tag/programming">programming</a>  <a href="/tag/code">code</a>  <a href="/tag/project">project</a>  <a href="/tag/focusonemotions">focusonemotions</a>  <a href="/tag/video">video</a> </div>
+    
+    <div class="comments"><i class="icon-comment-alt"></i> Comments: <a href="/archive/2013/07/21/javascript-activex-led#disqus_thread">--</a></div>
+    
+</div>
+<!-- /post -->
+
+    
+    
+    <!-- post -->
+<div class="post">
+    <div class="title"><a href="/archive/2013/06/09/migrating-from-wordpress-jekyll-github-pages">Migrating from Wordpress to Jekyll on GitHub Pages</a></div>
+    <div class="date"><i class="icon-calendar-empty"></i> 09 June 2013</div>
+    <div class="content"><p>Besides my writing skills, my problem with blogging was the software I was using, <strong>Wordpress</strong>. I found it slow, heavy and often insecure. I didn’t want my server exploding whenever I got a traffic spike, I didn’t want upgrading my WP modules and being worried about security issues. It was kind of hard to get it to look the way I wanted it. I wrote a custom theme but I wasn’t really satisfied with it, so I bought a one which looked cool, but I still wasn’t happy with my blog because it wasn’t “mine”.</p>
+
+<p>I wanted a static blog website that I could code and style the way I wanted, without restrictions. I wouldn’t have to worry about security since it would be static and would have no user input, search or comment features. I didn’t want to give up comments so I checked <strong>Disqus</strong>, whichs a really good commenting platform that you can embed anywhere without having to worry about security or performance issues. Disqus is a seamless iframe whith a lot of clever programming inside. <strong>Ben Vinegar</strong>, gave a great talk about it in 2012: <a href="http://www.youtube.com/watch?v=gQCm8VYn93Y">Seamless iframes: The future, today!</a>.</p>
+
+<p>Regarding the traffic spikes and server resources, I decided I’d move the blog out of my lab hosting (which is a tiny virtual machine) into somewhere that could serve static sites and I only had to worry about bandwith costs,</p>
+
+<p>I started researching about scaffolding tools and generators for static websites. I had used stuff like <strong>yeoman</strong> that worked reat for getting something started quickly, but it was more aimed at apps than static websites and I’d still have to do a lot of the work.</p>
+
+<p>Then I found about <strong>GitHub Pages</strong> and <strong>Jekyll</strong>, and they turned out to be the perfect solution for me. <strong>Jekyll</strong> is a blog-aware static website generator written in Ruby by <a href="http://tom.preston-werner.com/"><strong>Tom Preston-Werner</strong></a>. It’s easy to get started with and powerful enough to let you add your own plugins and teach it new tricks. <strong>GitHub Pages</strong> allows you to serve static content from your GitHub repositories without any setup</p>
+
+<p><strong>The pros Jekyll on GitHub Pages</strong></p>
+
+<ul>
+<li>It’s already blog-aware, so it has a notion of posts, categories, tags and a timeline.</li>
+
+<li>I can version my posts and contents using a CVS I love (git)</li>
+
+<li>I can <em>easily</em> share the source code for my blog</li>
+
+<li>I don’t have to worry about hosting</li>
+
+<li>I can still use any domain name I own</li>
+
+<li>It provides higher geek factor than having a WP blog</li>
+</ul>
+
+<p><strong>The cons</strong></p>
+
+<ul>
+<li>GitHub crashes every once in a while and maybe GH Pages comes down with it</li>
+</ul>
+
+<h5 id="working_with_github_pages">Working with GitHub Pages</h5>
+
+<p>GitHub Pages are divided into user pages and project pages. The only thing you have to do is create a <code>gh-pages</code> branch on your repository. Whatever you push to the branch will be served on your project page at <code>http://username.github.com/repository-name</code>. If you push a Jekyll site, GitHub Pages will actually build the site for you and serve that instead of the Jekyll source.</p>
+
+<h5 id="working_with_jekyll">Working with Jekyll</h5>
+
+<p>You create a new site running <code>jekyll new PATH</code> which creates a bare minimum site config and layouts.</p>
+
+<p>To create the extra tag and category index, as well as the archived month pages, I had to extend the same classes: <code>Jekyll::Page</code> and <code>Jekyll:Generator</code>. The method is pretty straightforward:</p>
+
+<ol>
+<li>Create a class that inherits from <code>Jekyll:Page</code></li>
+
+<li>In the page class, implement the <code>initialise</code> method</li>
+
+<li>In the <code>initialise</code> method, call <code>self.process(@name)</code> and <code>self.read_yaml</code> to get the contents of the layout</li>
+
+<li>Add to the <code>site.data</code> Hash any data you want to expose to the page</li>
+
+<li>Create a class that inherits from <code>Jekyll:Generator</code></li>
+
+<li>Implement the <code>generate(site)</code> method which adds instances of the custom page to the <code>site.pages</code> Array</li>
+</ol>
+
+<p>I generated the monthly archive by iterating over the <code>site.posts</code> Array and analysing the dates. To generate the sidebar menu that displays the year/month list I needed to have an index to iterate over, so I coded my plugin <code>archive_helper</code>. What I did was:</p>
+
+<ol>
+<li>Inherit from <code>Jekyll::Site</code>,</li>
+
+<li>Made an alias of the original <code>site_payload</code></li>
+
+<li>In my <code>site_payload</code> method, called the original <code>site_payload</code> and get the returned data.</li>
+
+<li>Added to <code>site.data</code> Hash the indexes created from the posts’ dates.</li>
+</ol>
+
+<p>The plugins to generate the tag and a category pages were already provided in the <a href="http://jekyllrb.com/docs/plugins/">Jekyll plugin docs</a> so I didn’t need to do any extra work.</p>
+
+<p>You can get the source code for my plugins and all of this blog <a href="https://github.com/orestes/blog.orestes.io">here</a></p>
+
+<h5 id="deploying_the_site">Deploying the site</h5>
+
+<p>The problem I had with my plugins is that GitHub pages builds the Jekyll sites using the <code>--safe</code> switch, which disables them. The alternative is to push your source code to the <code>master</code> branch and your generated site files to the <code>gh-pages</code> branch. I didn’t want to do it manually every time I updated the source, so I wrote a little <code>post-commit</code> hook that generates the site, wipes the <code>gh-pages</code> branch and pushes the freshly generated site to the <code>gh-pages</code> branch.</p>
+
+<h5 id="using_a_custom_domain_name">Using a custom domain name</h5>
+
+<p>Everything gets served from <code>http://username.github.com/repository-name</code>. Having a good grasp of the HTTP
+protocol is crucial for a web developer, and I think we should also know at least a little about the DNS protocol. I
+wanted to host my blog under <code>blog.orestes.io</code>, so I got to my DNS panel on my domain registrar and added
+a new <code>CNAME</code> DNS entry for <code>orestes.io</code> with the name was <code>blog</code> and the value
+<code>orestes.github.com</code>. A <strong>CNAME</strong> is a <strong>Canonical Name</strong> entry, which tells
+DNS clients asking where <code>blog.orestes.io</code> is, to ask instead for <code>orestes.github.io</code>.</p>
+
+<p>Let’s check what’s going on with my domain name using nslookup.</p>
+
+<pre><code>$ nslookup blog.orestes.io
+Server:		8.8.8.8
+Address:	8.8.8.8#53
+
+Non-authoritative answer:
+blog.orestes.io	canonical name = orestes.github.io.
+orestes.github.io	canonical name = github.map.fastly.net.
+Name:	github.map.fastly.net
+Address: 103.245.223.196</code></pre>
+
+<p>On the output above you can see how everything is being redirected to github.map.fastly.net</p>
+
+<p>When you finally get to the HTTP server behind <code>github.map.fastly.net</code>, it checks the HTTP 1.1 “Host” header, which is sent by the browser and will contain the value <code>blog.orestes.io</code>. Then the GH Pages takes a look under the user’s projects and their /CNAME files to check if any of this projects is assigned to this domain. If there is, you get the static site, if there isn’t, a 404 error.</p>
+
+<p>
+    <strong>Links:</strong>
+    <ul>
+        <li><a href="https://github.com/orestes/blog.orestes.io">Source code</a>.</li>
+        <li><a href="http://jekyllrb.com/">Jekyll docs</a>.</li>
+        <li><a href="https://help.github.com/categories/20/articles">GitHub Pages help</a>.</li>
+        <li><a href="http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html">“Blogging like a Hacker”</a> by Tom Preston-Werner.</li>
+</ul></div>
+    <div class="categories clearfix"><i class="icon-folder-close"></i> Categories:  <a href="/category/technologies">technologies</a>  <a href="/category/code">code</a> </div>
+    <div class="tags"><i class="icon-tag"></i> Tags:  <a href="/tag/jekyll">jekyll</a>  <a href="/tag/wordpress">wordpress</a>  <a href="/tag/github">github</a>  <a href="/tag/blog">blog</a>  <a href="/tag/programming">programming</a>  <a href="/tag/code">code</a>  <a href="/tag/ruby">ruby</a>  <a href="/tag/project">project</a> </div>
+    
+    <div class="comments"><i class="icon-comment-alt"></i> Comments: <a href="/archive/2013/06/09/migrating-from-wordpress-jekyll-github-pages#disqus_thread">--</a></div>
+    
+</div>
+<!-- /post -->
+
+    
+    
+    <!-- post -->
+<div class="post">
+    <div class="title"><a href="/archive/2012/11/17/why-programmers-work-at-night-the-book">Why programmers work at night: the book</a></div>
+    <div class="date"><i class="icon-calendar-empty"></i> 17 November 2012</div>
+    <div class="content"><p> Programmer <a target="_blank" href="http://swizec.com/"><strong>Swizec Teller</strong></a>  and author of the (now)
+famous blog post <a href="http://swizec.com/blog/why-programmers-work-at-night/swizec/3198" target="_blank">"Why programmers work
+at night"</a> has started a project on Leanpub to publish <a target="_blank" href="https://leanpub.com/nightowls/">a book about
+programmers</a>.</p>
+
+<blockquote>[...] In December 2011 I wrote down a bunch of assumptions about Why programmers work at night (<a
+target="_blank" href="http://swizec.com/blog/why-programmers-work-at-night/swizec/3198">link</a>) in a blogpost. I
+wrote it because I got tired of being called a lazy slob for waking up at 11am every day.
+
+After 4000 tweets, 10000 likes and many emails I didn't feel alone anymore.
+
+The most surprising feedback were emails along the lines of "Oh man! I finally understand my husband, thanks so much
+for writing this!". And it is because of those that I have finally decided to write a short ebook.
+
+In the book I'm going to:
+<ul>
+	<li>Show fellow night-time programmers (and others!) that they are not alone</li>
+	<li>Give practical tips on living with your friendly neighborhood programmer</li>
+	<li>Support my original hypotheses by interviewing cool programmers</li>
+	<li>Explore the modern trend of super early wakeruppers who approach the night time from the other end</li>
+</ul>
+
+</blockquote>
+
+<p>So if you're a programmer that feels missunderstood on your late nights of happy coding, maybe this book will be an
+ideal gift for your roomies, girlfriend, boyfriend, parents or even for your boss.</p>
+
+<strong>Link</strong>: <a target="_blank" href="https://leanpub.com/nightowls">Why programmers work at night: the book</a>
+</div>
+    <div class="categories clearfix"><i class="icon-folder-close"></i> Categories:  <a href="/category/books">books</a> </div>
+    <div class="tags"><i class="icon-tag"></i> Tags:  <a href="/tag/programming">programming</a>  <a href="/tag/book">book</a>  <a href="/tag/swizec%20teller">swizec teller</a>  <a href="/tag/reblog">reblog</a> </div>
+    
+    <div class="comments"><i class="icon-comment-alt"></i> Comments: <a href="/archive/2012/11/17/why-programmers-work-at-night-the-book#disqus_thread">--</a></div>
+    
+</div>
+<!-- /post -->
+
+    
+    
+    <!-- post -->
+<div class="post">
+    <div class="title"><a href="/archive/2011/12/18/why-programmers-work-at-night">Why programmers work at night</a></div>
+    <div class="date"><i class="icon-calendar-empty"></i> 18 December 2011</div>
+    <div class="content"><p>I just read an excelent article by <a target="_blank" href="http://swizec.com/"><strong>Swizec Teller</strong></a> about
+the reasons <a target="_blank" href="http://swizec.com/blog/why-programmers-work-at-night/swizec/3198">some programmers
+do their best work late at night</a>.</p>
+<p>I couldn't agree more with the author. The past year I stayed late at the office a lot of times doing a lot of good
+work. This year not so much because my girlfriend moved in with me, so I've gotten some rest from that but I kind of
+miss it too. When we were working on <a href="http://blog.orestes.io/tag/aura">Aura</a>, we would work until very late and wake
+up for lunch almost every day.</p>
+<p>
+<strong>Link</strong>: <a target="_blank" href="http://swizec.com/blog/why-programmers-work-at-night/swizec/3198">Why programmers work at night</a>
+</p>
+</div>
+    <div class="categories clearfix"><i class="icon-folder-close"></i> Categories:  <a href="/category/programming">programming</a> </div>
+    <div class="tags"><i class="icon-tag"></i> Tags:  <a href="/tag/aura">aura</a>  <a href="/tag/programming">programming</a>  <a href="/tag/swizec%20teller">swizec teller</a>  <a href="/tag/reblog">reblog</a> </div>
+    
+    <div class="comments"><i class="icon-comment-alt"></i> Comments: <a href="/archive/2011/12/18/why-programmers-work-at-night#disqus_thread">--</a></div>
+    
+</div>
+<!-- /post -->
+
+    
+</article> <!-- /posts -->
+            <!-- /page-content-->
+
+        </div>
+
+        <aside class="span3 sidebar">
+            <!-- sidebar -->
+<h5>About me</h5>
+<ul class="links">
+    <li style="margin-left: -5px"><img src="http://orestescarracedo.com/favicon.ico" alt=""/> <a target="_blank" href="http://orestescarracedo.com">My homepage</a></li>
+    <li><i class="icon-rss"></i> <a target="_blank" href="http://feeds.feedburner.com/orestes/blog">Subscribe</a></li>
+</ul>
+
+<h5>Social</h5>
+<ul class="links">
+    <li><i class="icon-twitter"></i> <a target="_blank" href="http://twitter.com/OrestesCA">Twitter</a></li>
+    <li><i class="icon-github"></i> <a target="_blank" href="https://github.com/orestes">GitHub</a></li>
+    <li><i class="icon-google-plus"></i> <a target="_blank" href="https://plus.google.com/u/0/101089646875098775879/posts">Google +</a></li>
+    <li><i class="icon-linkedin"></i> <a target="_blank" href="http://es.linkedin.com/in/orestesca">LinkedIn</a></li>
+</ul>
+
+<h5><i class="icon-calendar"></i>&nbsp;&nbsp;Archive</h5>
+<ul class="links year">
+    
+    <li class="title">2013</li>
+    <li>
+        <ul class="links month">
+            
+            <li>(1) <a href="/archive/2013/07/">July</a></li>
+            
+            <li>(1) <a href="/archive/2013/06/">June</a></li>
+            
+            <li>(1) <a href="/archive/2013/04/">April</a></li>
+            
+        </ul>
+    </li>
+    
+    <li class="title">2012</li>
+    <li>
+        <ul class="links month">
+            
+            <li>(2) <a href="/archive/2012/12/">December</a></li>
+            
+            <li>(4) <a href="/archive/2012/11/">November</a></li>
+            
+            <li>(1) <a href="/archive/2012/07/">July</a></li>
+            
+            <li>(1) <a href="/archive/2012/06/">June</a></li>
+            
+            <li>(1) <a href="/archive/2012/04/">April</a></li>
+            
+        </ul>
+    </li>
+    
+    <li class="title">2011</li>
+    <li>
+        <ul class="links month">
+            
+            <li>(1) <a href="/archive/2011/12/">December</a></li>
+            
+        </ul>
+    </li>
+    
+</ul>
+<!-- /sidebar -->
+
+        </aside>
+    </div>
+</div>
+
+<div class="grid main">
+    <div class="row-fluid">
+        <div class="span9 footer"><!-- footer -->
+© 2010 - 2013 Orestes Carracedo. <a href="http://github.com/orestes/blog.orestes.io">Source code</a>.<br/>
+All content is under <a href="/LICENSE">MIT License</a> unless otherwise specified.
+<!-- /footer -->
+</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var disqus_shortname = 'orestes';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<!-- /content -->
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34829303-1']);
+    _gaq.push(['_setDomainName', 'blog.orestes.io']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+</body>
+</html>

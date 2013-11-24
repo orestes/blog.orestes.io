@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>Orestes Carracedo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="" />
+    <link href="http://feeds.feedburner.com/orestes/blog" rel="alternate" title="Orestes Carracedo" type="application/atom+xml" />
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/css/blog.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/css/syntax.css" media="all" />
+</head>
+<body>
+
+<!-- content -->
+    <div class="grid main">
+    <div class="row-fluid">
+        <div class="span9">
+            <!-- header -->
+<div class="header">
+    <h2 style="margin-bottom: 0px"><a href="/">Orestes Carracedo</a></h2>
+    <h6 style="margin-top: 0px">Scrum Master, PHP Ninja, cat owner</h6>
+</div>
+<!-- / header -->
+
+
+            <!-- page-content-->
+            <article class="posts">
+    
+    
+    
+    <!-- post -->
+<div class="post">
+    <div class="title"><a href="/archive/2013/07/21/javascript-activex-led">Controlling a USB-RLY02 relay module over USB using C#, JavaScript and ActiveX</a></div>
+    <div class="date"><i class="icon-calendar-empty"></i> 21 July 2013</div>
+    <div class="content">
+<p>It was 2010 when we got some projects at <strong><a href="http://focusonemotions.com" target="_blank">Focus On
+Emotions</a></strong> from <strong>Ikea</strong>. Among the challenging stuff we did for them
+there was a project for automating the process of the users registering for a credit card.
+The final product was a digital user stall/kiosk with an interactive touch screen a physical keyboard and mouse. This project needed
+a couple of tricky features: <strong>ID verification</strong> and <strong>bank authorization</strong>.
+</p>
+
+<p><img class="img-polaroid" src="/media/2013/07/21/16_ikea.jpg" alt=""/></p>
+
+<p>This was not our first rodeo and we had another public
+<a target="_blank" href="http://w110.bcn.cat/portal/site/Ajuntament/menuitem.38c1cee3a16e78f040f740f7a2ef8a0c/?vgnextoid=0023204c1a071310VgnVCM10000074fea8c0RCRD&vgnextchannel=0023204c1a071310VgnVCM10000074fea8c0RCRD&lang=ca_ES">kiosk/stall project for <strong>the city hall, Ajuntament de Barcelona</strong></a> which allow citizens to do paperwork. They were challenging because we had to integrate lots
+of different providers, but we didn't manage any banking data so this was new to us. These projects had been running
+smoothly for years and we've got some recognition from them.
+<img class="img-polaroid use-left inside-text" src="/media/2013/07/21/quioscmp.jpg" width="23%"/>
+</p>
+
+<p>A couple of weeks after the project's launch we had gotten many reports of users being disoriented when following
+the process. One of the steps required the users to physically place their ID form on a small flatbed scanner
+for validation. Even though the physical space was an obvious empty box the users didn't realise that was where
+they were supposed to place their ID.</p>
+
+<p>The client asked us to modify the kiosk structure, add a LED stripe around the empty box and have it blink when the
+users got to the ID validation step. We had to give it a little thought before coming up with a solution because we
+had a tricky problem: <strong>hardware access was impossible</strong>. The whole application was written
+in Java, HTML and JavaScript,and it ran as a served web app inside a secured environment using
+<a target="_blank" href="http://www.sitekiosk.com/">SiteKiosk</a>. This was
+great for pushing software changes to the multiple kiosks installed for the project as well as for interacting with
+the bank's backoffice services in a secured environment (server-side). The manufacturer for the ID scanner had
+provided the dev team with an API that used ActiveX and JavaScript to control their hardware, so we followed that
+idea: we had to develop our own ActiveX control to activate the LED stripe whenever we needed to.</p>
+
+<p>We bought a simple relay board with an USB interface and started working on it. This relay board was great
+because it had two different relays that you could control independently. Each relay had a tiny onboard LED indicating
+its state. You can find it on <strong>RobotShop</strong>,
+<a target="_blank" href="http://www.robotshop.com/productinfo.aspx?pc=RB-Dev-35">here</a>.
+</p>
+
+<p><img class="img-polaroid use-right" src="http://www.robotshop.com/content/images/devantech-2-channel-usb-relay-large.jpg" width="23%" alt=""/></p>
+
+<p>
+I got a hold of the <a target="_blank" href="http://www.robotshop.com/content/PDF/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">controller's specification</a> [<a href="/media/2013/07/21/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">mirror</a>] and wrote a simple
+program to control it over USB by sending the byte-encoded messages for each action (open/close relay 1/2). It consisted
+of a minimal Windows Forms interface with a few buttons to open/close the USB port and switching on/off the relays.
+When I was sure I could make it work, I wrote a small function library and compiled it as an ActiveX:<br/>
+<code>csc /t:library USBLEDControllerLib.cs</code></br>
+To make it available for Internet Explorer, the DLL had to be registered:<br/>
+<code>regasm /tlb /codebase USBLEDControllerLib.dll</code></br>
+Both <code>regasm</code> and <code>csc</code> are provided by .NET Framework 2. in my case, It was already installed on
+<code>%WINDIR%\Microsoft.NET\Framework</code>
+</p>
+
+<p>To invoke the ActiveX control we use the full classname, including namespace.</p>
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">controller</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ActiveXObject</span><span class="p">(</span><span class="s2">&quot;FOE.USBLEDControllerLib&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">version</span> <span class="o">=</span> <span class="nx">controller</span><span class="p">.</span><span class="nx">getFirmwareVersion</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Running FOE USB LED Controller version &#39;</span> <span class="o">+</span> <span class="nx">version</span><span class="p">);</span>
+</code></pre></div>
+
+<p>The simple ActiveX control would trigger a security warning on IE. We suppressed this warning by implementing
+a few visible COM methods flagged as <code>[Serializable, ComVisible(true)]</code> which come from the
+<code><a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa751977(v=vs.85).aspx">IObjectSafety</a></code>
+interface. This told IE it could trust our library.</p>
+
+<p>The controller for the board had a limited set of functions so we had to extend them for our project. I added
+a couple of threaded functions to start/stop blinking the LEDs synchronously, stopping/starting only one of them
+and have the other synchronize on start, etc... Even though we had very little time and a lot of pressure I think
+it was a fun project. You can see the PoC in the video below. You click a button on a webpage and a LED lights up.
+Neat! I love the clicking sound from the relays, so mechanical :D</p>
+
+<p><iframe style="width: 100%" width="100%" height="315" src="http://www.youtube.com/embed/4uKpX1BUNq4" frameborder="0" allowfullscreen></iframe></p>
+
+<p>
+    <strong>Links</strong>:
+    <ul>
+        <li><a target="_blank" href="http://w110.bcn.cat/portal/site/Ajuntament/menuitem.38c1cee3a16e78f040f740f7a2ef8a0c/?vgnextoid=0023204c1a071310VgnVCM10000074fea8c0RCRD&vgnextchannel=0023204c1a071310VgnVCM10000074fea8c0RCRD&lang=en_GB">Procedures and services stalls</a> at <strong>BCN.cat</strong></li>
+        <li><a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa751977(v=vs.85).aspx">Safe Initialization and Scripting for ActiveX Controls</a> on <strong>MSDN</strong>.</li>
+        <li><a target="_blank" href="http://focusonemotions.com/web/en/projects.html/sector_publico_sectores">Public Sector clients</a> at <strong>Focus On Emotions</strong></li>
+        <li><a target="_blank" href="http://www.robotshop.com/productinfo.aspx?pc=RB-Dev-35">Devantech 2 Channel USB Relay</a> at <strong>RobotShop</strong>.</li>
+        <li><a target="_blank" href="http://www.robotshop.com/content/PDF/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">USB-RLY02 module specification</a> at <strong>RobotShop</strong>. [<a href="/media/2013/07/21/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf">mirror</a>]</li>
+    </ul>
+</p></div>
+    <div class="categories clearfix"><i class="icon-folder-close"></i> Categories:  <a href="/category/programming">programming</a>  <a href="/category/project">project</a>  <a href="/category/videos">videos</a> </div>
+    <div class="tags"><i class="icon-tag"></i> Tags:  <a href="/tag/relay">relay</a>  <a href="/tag/csharp">csharp</a>  <a href="/tag/javascript">javascript</a>  <a href="/tag/activex">activex</a>  <a href="/tag/hardware">hardware</a>  <a href="/tag/programming">programming</a>  <a href="/tag/code">code</a>  <a href="/tag/project">project</a>  <a href="/tag/focusonemotions">focusonemotions</a>  <a href="/tag/video">video</a> </div>
+    
+    <div class="comments"><i class="icon-comment-alt"></i> Comments: <a href="/archive/2013/07/21/javascript-activex-led#disqus_thread">--</a></div>
+    
+</div>
+<!-- /post -->
+
+    
+    
+    <!-- post -->
+<div class="post">
+    <div class="title"><a href="/archive/2013/06/09/migrating-from-wordpress-jekyll-github-pages">Migrating from Wordpress to Jekyll on GitHub Pages</a></div>
+    <div class="date"><i class="icon-calendar-empty"></i> 09 June 2013</div>
+    <div class="content"><p>Besides my writing skills, my problem with blogging was the software I was using, <strong>Wordpress</strong>. I found it slow, heavy and often insecure. I didn’t want my server exploding whenever I got a traffic spike, I didn’t want upgrading my WP modules and being worried about security issues. It was kind of hard to get it to look the way I wanted it. I wrote a custom theme but I wasn’t really satisfied with it, so I bought a one which looked cool, but I still wasn’t happy with my blog because it wasn’t “mine”.</p>
+
+<p>I wanted a static blog website that I could code and style the way I wanted, without restrictions. I wouldn’t have to worry about security since it would be static and would have no user input, search or comment features. I didn’t want to give up comments so I checked <strong>Disqus</strong>, whichs a really good commenting platform that you can embed anywhere without having to worry about security or performance issues. Disqus is a seamless iframe whith a lot of clever programming inside. <strong>Ben Vinegar</strong>, gave a great talk about it in 2012: <a href="http://www.youtube.com/watch?v=gQCm8VYn93Y">Seamless iframes: The future, today!</a>.</p>
+
+<p>Regarding the traffic spikes and server resources, I decided I’d move the blog out of my lab hosting (which is a tiny virtual machine) into somewhere that could serve static sites and I only had to worry about bandwith costs,</p>
+
+<p>I started researching about scaffolding tools and generators for static websites. I had used stuff like <strong>yeoman</strong> that worked reat for getting something started quickly, but it was more aimed at apps than static websites and I’d still have to do a lot of the work.</p>
+
+<p>Then I found about <strong>GitHub Pages</strong> and <strong>Jekyll</strong>, and they turned out to be the perfect solution for me. <strong>Jekyll</strong> is a blog-aware static website generator written in Ruby by <a href="http://tom.preston-werner.com/"><strong>Tom Preston-Werner</strong></a>. It’s easy to get started with and powerful enough to let you add your own plugins and teach it new tricks. <strong>GitHub Pages</strong> allows you to serve static content from your GitHub repositories without any setup</p>
+
+<p><strong>The pros Jekyll on GitHub Pages</strong></p>
+
+<ul>
+<li>It’s already blog-aware, so it has a notion of posts, categories, tags and a timeline.</li>
+
+<li>I can version my posts and contents using a CVS I love (git)</li>
+
+<li>I can <em>easily</em> share the source code for my blog</li>
+
+<li>I don’t have to worry about hosting</li>
+
+<li>I can still use any domain name I own</li>
+
+<li>It provides higher geek factor than having a WP blog</li>
+</ul>
+
+<p><strong>The cons</strong></p>
+
+<ul>
+<li>GitHub crashes every once in a while and maybe GH Pages comes down with it</li>
+</ul>
+
+<h5 id="working_with_github_pages">Working with GitHub Pages</h5>
+
+<p>GitHub Pages are divided into user pages and project pages. The only thing you have to do is create a <code>gh-pages</code> branch on your repository. Whatever you push to the branch will be served on your project page at <code>http://username.github.com/repository-name</code>. If you push a Jekyll site, GitHub Pages will actually build the site for you and serve that instead of the Jekyll source.</p>
+
+<h5 id="working_with_jekyll">Working with Jekyll</h5>
+
+<p>You create a new site running <code>jekyll new PATH</code> which creates a bare minimum site config and layouts.</p>
+
+<p>To create the extra tag and category index, as well as the archived month pages, I had to extend the same classes: <code>Jekyll::Page</code> and <code>Jekyll:Generator</code>. The method is pretty straightforward:</p>
+
+<ol>
+<li>Create a class that inherits from <code>Jekyll:Page</code></li>
+
+<li>In the page class, implement the <code>initialise</code> method</li>
+
+<li>In the <code>initialise</code> method, call <code>self.process(@name)</code> and <code>self.read_yaml</code> to get the contents of the layout</li>
+
+<li>Add to the <code>site.data</code> Hash any data you want to expose to the page</li>
+
+<li>Create a class that inherits from <code>Jekyll:Generator</code></li>
+
+<li>Implement the <code>generate(site)</code> method which adds instances of the custom page to the <code>site.pages</code> Array</li>
+</ol>
+
+<p>I generated the monthly archive by iterating over the <code>site.posts</code> Array and analysing the dates. To generate the sidebar menu that displays the year/month list I needed to have an index to iterate over, so I coded my plugin <code>archive_helper</code>. What I did was:</p>
+
+<ol>
+<li>Inherit from <code>Jekyll::Site</code>,</li>
+
+<li>Made an alias of the original <code>site_payload</code></li>
+
+<li>In my <code>site_payload</code> method, called the original <code>site_payload</code> and get the returned data.</li>
+
+<li>Added to <code>site.data</code> Hash the indexes created from the posts’ dates.</li>
+</ol>
+
+<p>The plugins to generate the tag and a category pages were already provided in the <a href="http://jekyllrb.com/docs/plugins/">Jekyll plugin docs</a> so I didn’t need to do any extra work.</p>
+
+<p>You can get the source code for my plugins and all of this blog <a href="https://github.com/orestes/blog.orestes.io">here</a></p>
+
+<h5 id="deploying_the_site">Deploying the site</h5>
+
+<p>The problem I had with my plugins is that GitHub pages builds the Jekyll sites using the <code>--safe</code> switch, which disables them. The alternative is to push your source code to the <code>master</code> branch and your generated site files to the <code>gh-pages</code> branch. I didn’t want to do it manually every time I updated the source, so I wrote a little <code>post-commit</code> hook that generates the site, wipes the <code>gh-pages</code> branch and pushes the freshly generated site to the <code>gh-pages</code> branch.</p>
+
+<h5 id="using_a_custom_domain_name">Using a custom domain name</h5>
+
+<p>Everything gets served from <code>http://username.github.com/repository-name</code>. Having a good grasp of the HTTP
+protocol is crucial for a web developer, and I think we should also know at least a little about the DNS protocol. I
+wanted to host my blog under <code>blog.orestes.io</code>, so I got to my DNS panel on my domain registrar and added
+a new <code>CNAME</code> DNS entry for <code>orestes.io</code> with the name was <code>blog</code> and the value
+<code>orestes.github.com</code>. A <strong>CNAME</strong> is a <strong>Canonical Name</strong> entry, which tells
+DNS clients asking where <code>blog.orestes.io</code> is, to ask instead for <code>orestes.github.io</code>.</p>
+
+<p>Let’s check what’s going on with my domain name using nslookup.</p>
+
+<pre><code>$ nslookup blog.orestes.io
+Server:		8.8.8.8
+Address:	8.8.8.8#53
+
+Non-authoritative answer:
+blog.orestes.io	canonical name = orestes.github.io.
+orestes.github.io	canonical name = github.map.fastly.net.
+Name:	github.map.fastly.net
+Address: 103.245.223.196</code></pre>
+
+<p>On the output above you can see how everything is being redirected to github.map.fastly.net</p>
+
+<p>When you finally get to the HTTP server behind <code>github.map.fastly.net</code>, it checks the HTTP 1.1 “Host” header, which is sent by the browser and will contain the value <code>blog.orestes.io</code>. Then the GH Pages takes a look under the user’s projects and their /CNAME files to check if any of this projects is assigned to this domain. If there is, you get the static site, if there isn’t, a 404 error.</p>
+
+<p>
+    <strong>Links:</strong>
+    <ul>
+        <li><a href="https://github.com/orestes/blog.orestes.io">Source code</a>.</li>
+        <li><a href="http://jekyllrb.com/">Jekyll docs</a>.</li>
+        <li><a href="https://help.github.com/categories/20/articles">GitHub Pages help</a>.</li>
+        <li><a href="http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html">“Blogging like a Hacker”</a> by Tom Preston-Werner.</li>
+</ul></div>
+    <div class="categories clearfix"><i class="icon-folder-close"></i> Categories:  <a href="/category/technologies">technologies</a>  <a href="/category/code">code</a> </div>
+    <div class="tags"><i class="icon-tag"></i> Tags:  <a href="/tag/jekyll">jekyll</a>  <a href="/tag/wordpress">wordpress</a>  <a href="/tag/github">github</a>  <a href="/tag/blog">blog</a>  <a href="/tag/programming">programming</a>  <a href="/tag/code">code</a>  <a href="/tag/ruby">ruby</a>  <a href="/tag/project">project</a> </div>
+    
+    <div class="comments"><i class="icon-comment-alt"></i> Comments: <a href="/archive/2013/06/09/migrating-from-wordpress-jekyll-github-pages#disqus_thread">--</a></div>
+    
+</div>
+<!-- /post -->
+
+    
+    
+    <!-- post -->
+<div class="post">
+    <div class="title"><a href="/archive/2013/04/10/breaking-the-1000ms-time-to-glass-mobile-barrier">Breaking the 1000ms Time to Glass Mobile Barrier</a></div>
+    <div class="date"><i class="icon-calendar-empty"></i> 10 April 2013</div>
+    <div class="content"><p><iframe style="width: 100%" width="100%" height="315" src="http://www.youtube.com/embed/Il4swGfTOSM?feature=oembed" frameborder="0" allowfullscreen></iframe></p>
+<p>A great talk by <strong><a target="_blank" href="http://www.igvita.com/">Ilya Grigorik</a></strong>.</p>
+
+<p>
+    <strong>Links:</strong>
+    <ul>
+        <li>
+            <a href="http://www.appliness.com/ilya-grigorik/" target="_blank">Interview with Ilya Grigorik</a> on <strong>Applines</strong>
+        </li>
+        <li><a target="_blank" href="http://www.youtube.com/watch?v=Il4swGfTOSM">Breaking the 1000ms Time to Glass Mobile Barrier</a> on <strong>YouTube</strong>.</li>
+    </ul>
+</p></div>
+    <div class="categories clearfix"><i class="icon-folder-close"></i> Categories:  <a href="/category/talks">talks</a> </div>
+    <div class="tags"><i class="icon-tag"></i> Tags:  <a href="/tag/talk">talk</a>  <a href="/tag/meetup">meetup</a>  <a href="/tag/sfhtml5">sfhtml5</a>  <a href="/tag/mobile">mobile</a>  <a href="/tag/video">video</a>  <a href="/tag/ilya%20grigorik">ilya grigorik</a> </div>
+    
+    <div class="comments"><i class="icon-comment-alt"></i> Comments: <a href="/archive/2013/04/10/breaking-the-1000ms-time-to-glass-mobile-barrier#disqus_thread">--</a></div>
+    
+</div>
+<!-- /post -->
+
+    
+    
+    <!-- post -->
+<div class="post">
+    <div class="title"><a href="/archive/2012/12/10/what-is-niantic-project">What is "Niantic Project"?</a></div>
+    <div class="date"><i class="icon-calendar-empty"></i> 10 December 2012</div>
+    <div class="content">
+
+<p><iframe style="width: 100%" width="100%" height="315" src="http://www.youtube.com/embed/Ss-Z-QjFUio" frameborder="0" allowfullscreen></iframe></p>
+
+<p class="update">This was posted about a month after the launch of <a href="http://ingress.com" target="_blank">Ingress</a>, an
+Augmented Reality game by Google. In the beginning you could only be invited by someone working on the game, so
+we had to post ingress stories, artwork, articles, whatever we could to get attention from them and receive an
+invitation to play. Today is much easier to get invited,
+you can just go to <a href="http://ingress.com" target="_blank">ingress.com</a> and request an invitation.
+It's really fun!</p>
+
+<p>Ok, I have to tell you about this. I was looking for information about "Ingress" which is some kind of game a few
+people are playing but nobody seems to know how to get access to. I was browsing around and found out about something
+called "Niantic Project". Apparently there's something big going on and only a handful of people and aware of it,
+the ones playing Ingress. </p>
+<p>I found a few cool pictures while googling around and I wanted to save some for later, but I accidentally saved this
+one as a .html file and that's when things got weird.</p>
+
+<p><img class="img-polaroid" src="/media/2012/12/10/niantic-930x454.jpg" alt=""/></p>
+
+<p><strong>Try and do it yourself.</strong> Save this image to your local disk, and rename it to from <code>.jpg</code>
+to <code>.html</code>. When you open it in your browser, it will look almost the same, but you'll notice that your
+browser's background is now black, and the image has a weird green border around it, something it didn't have before.
+If you move your mouse over the image, you're going to find a mysterious text that leads to a strange website. I don't
+know who exactly created that webpage, but there's a ton of info on there.</p>
+
+<p>Why whould somedy hide something inside an image?<br/>
+What are they hiding from us?<br/>
+What is "Niantic Project"?</p>
+
+<p>
+    <strong>Links:</strong>
+    <ul>
+        <li><a target="_blank" href="http://www.nianticproject.com/">Niantic Project</a></li>
+        <li><a target="_blank" href="http://ingress.com">Ingress</a></li>
+    </ul>
+</p></div>
+    <div class="categories clearfix"><i class="icon-folder-close"></i> Categories:  <a href="/category/games">games</a>  <a href="/category/videos">videos</a> </div>
+    <div class="tags"><i class="icon-tag"></i> Tags:  <a href="/tag/ingressinvite">ingressinvite</a>  <a href="/tag/ingresss">ingresss</a>  <a href="/tag/game">game</a>  <a href="/tag/niantic">niantic</a>  <a href="/tag/video">video</a> </div>
+    
+    <div class="comments"><i class="icon-comment-alt"></i> Comments: <a href="/archive/2012/12/10/what-is-niantic-project#disqus_thread">--</a></div>
+    
+</div>
+<!-- /post -->
+
+    
+    
+    <!-- post -->
+<div class="post">
+    <div class="title"><a href="/archive/2012/12/06/goto-conference-playlist">GOTO Aarhus 2012 playlist</a></div>
+    <div class="date"><i class="icon-calendar-empty"></i> 06 December 2012</div>
+    <div class="content"><p class="update"><strong>Update july 2013: </strong>Jez's talk has been deleted :(</p>
+<p><iframe style="width: 100%" width="100%"height="315" src="http://www.youtube.com/embed/2jt-up0a4JY?fs=1&feature=embed" frameborder="0" allowfullscreen></iframe></p>
+<p>The playlist rom the recent GOTO Aarhus 2012 has been published on YouTube.</p>
+<p><strong><a href="http://continuousdelivery.com/">Jez Humble</a></strong>'s "Implementing Continuous Delivery" where he talks about the organisational problems, mistakes
+and misconceptions that come up when trying to implement <strong>Continuous Delivery</strong> has been one of my favourites.</p>
+
+<p>
+<strong>Link</strong>: <a href="http://www.youtube.com/playlist?list=PLEx5khR4g7PJmH05qNUmmo8WzSSaJIzLj" target="_blank">GOTO Aarhus 2012 playlist</a> on <strong>YouTube</strong> (79 videos, 53 hours)
+</p></div>
+    <div class="categories clearfix"><i class="icon-folder-close"></i> Categories:  <a href="/category/talks">talks</a>  <a href="/category/conferences">conferences</a>  <a href="/category/playlists">playlists</a> </div>
+    <div class="tags"><i class="icon-tag"></i> Tags:  <a href="/tag/talk">talk</a>  <a href="/tag/conference">conference</a>  <a href="/tag/goto%20conference">goto conference</a>  <a href="/tag/gotoaarhus">gotoaarhus</a>  <a href="/tag/gotoaarhus%202012">gotoaarhus 2012</a>  <a href="/tag/video">video</a>  <a href="/tag/playlist">playlist</a>  <a href="/tag/jez%20humble">jez humble</a> </div>
+    
+    <div class="comments"><i class="icon-comment-alt"></i> Comments: <a href="/archive/2012/12/06/goto-conference-playlist#disqus_thread">--</a></div>
+    
+</div>
+<!-- /post -->
+
+    
+    
+    <!-- post -->
+<div class="post">
+    <div class="title"><a href="/archive/2012/11/21/html5devconf-2012-playlist">HTML5DevConf 2012 playlist</a></div>
+    <div class="date"><i class="icon-calendar-empty"></i> 21 November 2012</div>
+    <div class="content"><p><iframe style="width: 100%" width="100%" height="315" src="http://www.youtube.com/embed/gQCm8VYn93Y" frameborder="0" allowfullscreen></iframe></p>
+<p><strong><a href="http://benv.ca/" target="_blank">Ben Vinegar</a></strong>'s talk <em>Seamless iFrames: The Future, Today!</em> was very interesting.</p>
+<p class="update">This was a WordPress blog until I switched to <strong>Jekyll </strong> and started using <strong>Disqus</strong> for the comments and I must say I love it.</p>
+<p>
+<strong>Link</strong>: <a href="http://www.youtube.com/playlist?list=PLAIXSzgkhDs7gu24tYyS432v4AGZwPc8I" target="_blank">HTML5DevConf 2012 playlist</a> on <strong>YouTube</strong> (60 videos, 30 hours).<br/>
+<strong>Via</strong>: <a href="http://html5weekly.com/" target="_blank">HTML5 Weekly</a>
+</p>
+</div>
+    <div class="categories clearfix"><i class="icon-folder-close"></i> Categories:  <a href="/category/talks">talks</a>  <a href="/category/conferences">conferences</a>  <a href="/category/videos">videos</a>  <a href="/category/playlists">playlists</a> </div>
+    <div class="tags"><i class="icon-tag"></i> Tags:  <a href="/tag/talk">talk</a>  <a href="/tag/conference">conference</a>  <a href="/tag/html5devconf">html5devconf</a>  <a href="/tag/html5devconf%202012">html5devconf 2012</a>  <a href="/tag/video">video</a>  <a href="/tag/playlist">playlist</a>  <a href="/tag/html5">html5</a>  <a href="/tag/ben%20vinegar">ben vinegar</a> </div>
+    
+    <div class="comments"><i class="icon-comment-alt"></i> Comments: <a href="/archive/2012/11/21/html5devconf-2012-playlist#disqus_thread">--</a></div>
+    
+</div>
+<!-- /post -->
+
+    
+    
+    <!-- post -->
+<div class="post">
+    <div class="title"><a href="/archive/2012/11/17/why-programmers-work-at-night-the-book">Why programmers work at night: the book</a></div>
+    <div class="date"><i class="icon-calendar-empty"></i> 17 November 2012</div>
+    <div class="content"><p> Programmer <a target="_blank" href="http://swizec.com/"><strong>Swizec Teller</strong></a>  and author of the (now)
+famous blog post <a href="http://swizec.com/blog/why-programmers-work-at-night/swizec/3198" target="_blank">"Why programmers work
+at night"</a> has started a project on Leanpub to publish <a target="_blank" href="https://leanpub.com/nightowls/">a book about
+programmers</a>.</p>
+
+<blockquote>[...] In December 2011 I wrote down a bunch of assumptions about Why programmers work at night (<a
+target="_blank" href="http://swizec.com/blog/why-programmers-work-at-night/swizec/3198">link</a>) in a blogpost. I
+wrote it because I got tired of being called a lazy slob for waking up at 11am every day.
+
+After 4000 tweets, 10000 likes and many emails I didn't feel alone anymore.
+
+The most surprising feedback were emails along the lines of "Oh man! I finally understand my husband, thanks so much
+for writing this!". And it is because of those that I have finally decided to write a short ebook.
+
+In the book I'm going to:
+<ul>
+	<li>Show fellow night-time programmers (and others!) that they are not alone</li>
+	<li>Give practical tips on living with your friendly neighborhood programmer</li>
+	<li>Support my original hypotheses by interviewing cool programmers</li>
+	<li>Explore the modern trend of super early wakeruppers who approach the night time from the other end</li>
+</ul>
+
+</blockquote>
+
+<p>So if you're a programmer that feels missunderstood on your late nights of happy coding, maybe this book will be an
+ideal gift for your roomies, girlfriend, boyfriend, parents or even for your boss.</p>
+
+<strong>Link</strong>: <a target="_blank" href="https://leanpub.com/nightowls">Why programmers work at night: the book</a>
+</div>
+    <div class="categories clearfix"><i class="icon-folder-close"></i> Categories:  <a href="/category/books">books</a> </div>
+    <div class="tags"><i class="icon-tag"></i> Tags:  <a href="/tag/programming">programming</a>  <a href="/tag/book">book</a>  <a href="/tag/swizec%20teller">swizec teller</a>  <a href="/tag/reblog">reblog</a> </div>
+    
+    <div class="comments"><i class="icon-comment-alt"></i> Comments: <a href="/archive/2012/11/17/why-programmers-work-at-night-the-book#disqus_thread">--</a></div>
+    
+</div>
+<!-- /post -->
+
+    
+    
+    <!-- post -->
+<div class="post">
+    <div class="title"><a href="/archive/2012/11/16/petr-mitrichev">Petr Mitrichev</a></div>
+    <div class="date"><i class="icon-calendar-empty"></i> 16 November 2012</div>
+    <div class="content"><p>I first learned about <strong>Petr Mitrichev</strong> the past year when he won 2011's Facebook Hacker Cup. He's a Google developer
+leading the current competitive programming challenges. He also keeps an interesting blog at
+<a  target="_blank" href="http://petr-mitrichev.blogspot.com">petr-mitrichev.blogspot.com</a> where he talks
+about algorithms and sometimes challenges his readers with some problems.</p>
+
+<p><a href="http://www.technologyreview.com" target="_blank">MIT's Technology Review</a> has a nice introductory
+<a href="http://www.technologyreview.com/news/428610/in-the-olympics-of-algorithms-a-russian-keeps-winning-gold/">article</a>
+about him.</p>
+
+<p>I also found some interesting reading material if you're into competitive programming.
+<a href="http://codeforces.com/blog/entry/70">Codeforces</a> has a great post about Sao Paulo Training Camp 2010
+containing his solutions to problems and some video explanations.
+</p>
+
+<p class="update"><strong>Update March 2013</strong>: He came up on top at 2013's Facebook Hacker Cup as well. This is guy is amazing :)</p>
+
+<p>
+    <strong>Links</strong>:
+    <ul>
+        <li><a target="_blank" href="http://www.technologyreview.com/news/428610/in-the-olympics-of-algorithms-a-russian-keeps-winning-gold/">MIT's Technology review article about Petr Mitrichev</a></li>
+        <li><a target="_blank" href="http://petr-mitrichev.blogspot.com">Petr Mitrichev's blog</a></li>
+        <li><a target="_blank" href="https://www.facebook.com/hackercup">Facebook Hacker Cup</a></li>
+        <li><a target="_blank" href="http://codeforces.com/blog/entry/70/">Petr Mitrichev, Last 3 days in Sao Paulo Training Camp 2010</a> at <strong>Codeforces</strong></li>
+    </ul>
+</p></div>
+    <div class="categories clearfix"><i class="icon-folder-close"></i> Categories:  <a href="/category/people">people</a> </div>
+    <div class="tags"><i class="icon-tag"></i> Tags:  <a href="/tag/people">people</a>  <a href="/tag/petr%20mitrichev">petr mitrichev</a>  <a href="/tag/reblog">reblog</a> </div>
+    
+    <div class="comments"><i class="icon-comment-alt"></i> Comments: <a href="/archive/2012/11/16/petr-mitrichev#disqus_thread">--</a></div>
+    
+</div>
+<!-- /post -->
+
+    
+    
+    <!-- post -->
+<div class="post">
+    <div class="title"><a href="/archive/2012/11/14/nfc-bootcamp-barcelona">NFC Bootcamp Barcelona 2012</a></div>
+    <div class="date"><i class="icon-calendar-empty"></i> 14 November 2012</div>
+    <div class="content">
+
+<p style="text-align: center">
+    <img src="/media/2012/11/14/smart-city-expo.png" alt="Barcelona Smart City Expo World Congress 2012" title="Barcelona Smart City Expo World Congress 2012" width="295" />
+    <img src="/media/2012/11/14/nfc-bootcamp.png" alt="NFC Bootcamp" title="NFC Bootcamp" width="300" />
+</p>
+
+<p>The <a href="https://www.nfcbootcamp.com/event-registration/?ee=22">NFC Bootcamp Barcelona 2012</a> was held as
+part of the <a href="http://www.smartcityexpo.com/" title=" Smart City Expo World Congress 2012" target="_blank">Smart
+City Expo World Congress 2012</a> at the <a href="http://www.firabcn.es/en/venues_granvia" title="Fira Gran Via Convention Center" target="_blank">Fira
+Gran Via Convention Center</a> in <strong>Barcelona</strong>.
+We had some problems when trying to get our accreditations
+at the entrance but with a little help from the organisation we managed to finally get inside.</p>
+
+<p>We met <strong>Robert Sabella</strong> from
+<a href="http://www.otatraining.com/" title="OTA Training" target="_blank">OTA Training</a> and we chatted for a bit
+while we waited for others to arrive. Rob started the day by introducing NFC and the
+work the <a href="http://www.nfcbootcamp.com/" title="NFC Bootcamp" target="_blank">NFC Bootcamp</a> has being doing
+for the past year.</p>
+
+<p>Bastien Latge from <a href="http://www.insidesecure.com/" title="INSIDE Secure" target="_blank">INSIDE Secure</a>
+followed up with a more in depth talk about the key players in an NFC Ecosystem and underlined some of the most
+common problems and situations companies deploying NFC solutions encounter the most. He talked about the NFC parts,
+specially the <strong>Secure Element</strong> and the different implementations and security measures implemented in
+them. He also talked briefly about the hardware which provides NFC capabilities for mobile phones without
+built-in NFC tech.</p>
+
+<p>
+<img src="/media/2012/11/14/typo.jpg" class="img-polaroid use-left" alt="The accreditation" title="The accreditation" />
+Just before lunch, we met Stéphane Doutriaux from
+<a href="http://www.poken.com/" title="Poken" target="_blank">Poken</a>. He made a brief introduction about
+<strong>Poken</strong> with a video. Afterwards we all got our own pokens and did a little tour of the reception
+area and the schedule wall poster, poking along the way and getting comfortable with the devices.</p>
+
+<p>After lunch, <strong>Gloria Lozano </strong> from <a href="http://ta.bcntouch.com/" title="BCN Touch" target="_blank">BCN Touch</a>
+gave her talk, focusing on use cases and their projects from the last past years.</p>
+
+<p>Then Stéphane came back to talk a bit more about the marketing and user experience side of NFC and how he thinks
+we should put the most of our efforts in providing some value rather than some technology, and use NFC as a means
+and not as a goal.</p>
+
+<p>At the beginning of day 2, we got a USB NFC reader and different cards with different NFC chips in them and Bastien
+finished his talk about the players in the NFC environment.
+
+<p>Then we met <strong>Fernando Cejas</strong>, a mobile developer based in Barcelona, working for
+<a href="http://flomio.com/">Flomio</a>. He's also de organiser of the <strong>Google Developers Group Barcelona</strong>.
+His talk was going to be more focused on de technical/developer side of NFC but due to the majority of the assistants
+being not so technical that part was skipped. Bummer.</p>
+
+<p>
+    <img src="/media/2012/11/14/evil-robot.jpg" alt="" title="The Fernando-bot" class="img-polaroid use-left"/>
+    Before lunch, we went for a walk around the Smart City Expo and Fernando was captured by an evil robot.
+    After we rescued him, Fernando gave a more technical explanation of the NFC components, the different NDEF
+    well known formats and the read/writing permissions.
+    He also talked about the idea of "cloud tags", <strong>flomio</strong>, the
+    <a href="http://www.kickstarter.com/projects/flomio/flojack-nfc-for-ipad-and-iphone">FloJack</a> to provide NFC for
+    iphone/ipad devices and other solution prototypes they had researched using other tech such as the
+    <a href="http://www.raspberrypi.org/">Raspberry Pi</a> and the <a href="http://en.wikipedia.org/wiki/GuruPlug">GuruPlug</a>
+</p>
+
+<p>
+    Then Stéphane came back and we participated in a workshop with Poken and their partner tools. We created a campaign
+    and linked a Poken Tag using the NFC Reader/Writer. We also learned a bit more about the technology used in Poken.
+    The Poken tags use the same technology as the regular Pokens.
+    <img src="/media/2012/11/14/poken-tag.jpg" alt="Poken Tag" title="Poken Tag" class="img-polaroid use-right"/>
+    They use a <strong>Swatch</strong> licensed
+    chip with added NFC capabilities and a full USB stack,powered by a 9 volt battery that lasts about two years.
+    Everything is encased in silicon so its fairly resistant, and of course, it's sticky. Poken Tags have to be
+    activated using an NFC writer and power themselves off when they are stacked or they detect too much inference
+    to not drain the battery.
+</p>
+
+<p>
+    We all got an NFC Bootcamp completion certificate on behalf of OTA Training and the
+    <a href="http://aenfc.com">AENFC</a> and we took some pictures. It was a great experience and I'm sure both
+    speakers and attendees will keep in touch with each other.
+</p>
+
+<p><iframe width="500" height="281" src="http://www.youtube.com/embed/Pa_VbD-1QS0?fs=1&feature=oembed" frameborder="0" allowfullscreen></iframe></p>
+
+<p>
+    <strong>Links:</strong>
+    <ul>
+        <li><a target="_blank" href="http://www.developer.nokia.com/Community/Wiki/Understanding_NFC_Data_Exchange_Format_(NDEF)_messages">Understanding NFC NDEF messages</a> at <strong>Nokia Developer</strong></li>
+        <li><a target="_blank" href="http://www.youtube.com/watch?v=IEHs7Llsb9Q">Poken - Collect People, Places and Things</a> on <strong>YouTUbe</strong></li>
+    </ul>
+</p></div>
+    <div class="categories clearfix"><i class="icon-folder-close"></i> Categories: </div>
+    <div class="tags"><i class="icon-tag"></i> Tags:  <a href="/tag/conference">conference</a>  <a href="/tag/nfc%20bootcamp">nfc bootcamp</a>  <a href="/tag/video">video</a> </div>
+    
+    <div class="comments"><i class="icon-comment-alt"></i> Comments: <a href="/archive/2012/11/14/nfc-bootcamp-barcelona#disqus_thread">--</a></div>
+    
+</div>
+<!-- /post -->
+
+    
+    
+    <!-- post -->
+<div class="post">
+    <div class="title"><a href="/archive/2012/07/01/let-silex-wrap-your-legacy-php-application">Let Silex Wrap Your Legacy PHP Application</a></div>
+    <div class="date"><i class="icon-calendar-empty"></i> 01 July 2012</div>
+    <div class="content"><p>PHP + Symfony developer <a href="http://php-and-symfony.matthiasnoback.nl" target="_blank">Matthias Noback</a> has
+written a really nice article about the use of Silex on outdated PHP projects. If you've been looking forward to
+migrate/redo some of your old projects using Symfony components, this may be worth reading.</p>
+
+<p><strong>Link</strong>: <a href="http://php-and-symfony.matthiasnoback.nl/2012/06/let-silex-wrap-your-legacy-php-application-and-add-twig-for-templating/" target="_blank">Let Silex Wrap Your Legacy PHP Application (and add Twig for templating)</a></p></div>
+    <div class="categories clearfix"><i class="icon-folder-close"></i> Categories:  <a href="/category/php">php</a>  <a href="/category/reblogs">reblogs</a> </div>
+    <div class="tags"><i class="icon-tag"></i> Tags:  <a href="/tag/php">php</a>  <a href="/tag/silex">silex</a>  <a href="/tag/symfony">symfony</a>  <a href="/tag/matthias%20noback">matthias noback</a>  <a href="/tag/reblog">reblog</a> </div>
+    
+    <div class="comments"><i class="icon-comment-alt"></i> Comments: <a href="/archive/2012/07/01/let-silex-wrap-your-legacy-php-application#disqus_thread">--</a></div>
+    
+</div>
+<!-- /post -->
+
+    
+</article> <!-- /posts -->
+
+
+<!-- pagination -->
+<div class="pagination">
+    <ul>
+        
+
+        
+        <li class="page active"><a href="#">1</a></li>
+        
+
+        
+        
+        <li><a href="/page2">2</a></li>
+        
+        
+
+        
+        <li class="next">
+            <a href="/page2">»</a>
+        </li>
+        
+    </ul>
+</div>
+<!-- /pagination -->
+
+            <!-- /page-content-->
+
+        </div>
+
+        <aside class="span3 sidebar">
+            <!-- sidebar -->
+<h5>About me</h5>
+<ul class="links">
+    <li style="margin-left: -5px"><img src="http://orestescarracedo.com/favicon.ico" alt=""/> <a target="_blank" href="http://orestescarracedo.com">My homepage</a></li>
+    <li><i class="icon-rss"></i> <a target="_blank" href="http://feeds.feedburner.com/orestes/blog">Subscribe</a></li>
+</ul>
+
+<h5>Social</h5>
+<ul class="links">
+    <li><i class="icon-twitter"></i> <a target="_blank" href="http://twitter.com/OrestesCA">Twitter</a></li>
+    <li><i class="icon-github"></i> <a target="_blank" href="https://github.com/orestes">GitHub</a></li>
+    <li><i class="icon-google-plus"></i> <a target="_blank" href="https://plus.google.com/u/0/101089646875098775879/posts">Google +</a></li>
+    <li><i class="icon-linkedin"></i> <a target="_blank" href="http://es.linkedin.com/in/orestesca">LinkedIn</a></li>
+</ul>
+
+<h5><i class="icon-calendar"></i>&nbsp;&nbsp;Archive</h5>
+<ul class="links year">
+    
+    <li class="title">2013</li>
+    <li>
+        <ul class="links month">
+            
+            <li>(1) <a href="/archive/2013/07/">July</a></li>
+            
+            <li>(1) <a href="/archive/2013/06/">June</a></li>
+            
+            <li>(1) <a href="/archive/2013/04/">April</a></li>
+            
+        </ul>
+    </li>
+    
+    <li class="title">2012</li>
+    <li>
+        <ul class="links month">
+            
+            <li>(2) <a href="/archive/2012/12/">December</a></li>
+            
+            <li>(4) <a href="/archive/2012/11/">November</a></li>
+            
+            <li>(1) <a href="/archive/2012/07/">July</a></li>
+            
+            <li>(1) <a href="/archive/2012/06/">June</a></li>
+            
+            <li>(1) <a href="/archive/2012/04/">April</a></li>
+            
+        </ul>
+    </li>
+    
+    <li class="title">2011</li>
+    <li>
+        <ul class="links month">
+            
+            <li>(1) <a href="/archive/2011/12/">December</a></li>
+            
+        </ul>
+    </li>
+    
+</ul>
+<!-- /sidebar -->
+
+        </aside>
+    </div>
+</div>
+
+<div class="grid main">
+    <div class="row-fluid">
+        <div class="span9 footer"><!-- footer -->
+© 2010 - 2013 Orestes Carracedo. <a href="http://github.com/orestes/blog.orestes.io">Source code</a>.<br/>
+All content is under <a href="/LICENSE">MIT License</a> unless otherwise specified.
+<!-- /footer -->
+</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var disqus_shortname = 'orestes';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<!-- /content -->
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34829303-1']);
+    _gaq.push(['_setDomainName', 'blog.orestes.io']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+</body>
+</html>
