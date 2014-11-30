@@ -5,7 +5,7 @@ archive_dir: archive
 category_dir: category
 tag_dir: tag
 
-pygments: true
+highlighter: rouge
 
 permalink: /archive/:year/:month/:day/:title
 
@@ -19,7 +19,7 @@ title: Orestes Carracedo
 
 author_name: Orestes Carracedo
 author_email: orestes.ca@gmail.com
-copyright_years: 2009-2013
+copyright_years: 2009-2014
 
 feed_title: Orestes Carracedo
 feed_url: http://feeds.feedburner.com/orestes/blog
