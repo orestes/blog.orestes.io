@@ -1,7 +1,7 @@
 <!-- sidebar -->
-<h5>About me</h5>
+<h5> </h5>
 <ul class="links">
-    <li style="margin-left: -5px"><img src="http://orestescarracedo.com/favicon.ico" alt=""/> <a target="_blank" href="http://orestescarracedo.com">My homepage</a></li>
+    <li style="margin-left: -5px"><img src="http://orestescarracedo.com/favicon.ico" alt=""/> <a target="_blank" href="http://orestescarracedo.com">About me</a></li>
     <li><i class="icon-rss"></i> <a target="_blank" href="{{ site.feed_url }}">Subscribe</a></li>
 </ul>
 
@@ -20,7 +20,7 @@
     <li>
         <ul class="links month">
             {% for month in site.month_index[year] %}
-            <li>({{ site.post_count[year][month] }}) <a href="/archive/{{ year }}/{{ month }}/">{{ month | month_name }}</a></li>
+            <li>{{ site.post_count[year][month] }} <a href="/archive/{{ year }}/{{ month }}/">{{ month | month_name }}</a></li>
             {% endfor %}
         </ul>
     </li>
