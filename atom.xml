@@ -3,7 +3,7 @@
   <title>Orestes Carracedo</title>
   <link href="http://blog.orestes.io/atom.xml" rel="self" />
   <link href="http://blog.orestes.io" />
-  <updated>2014-12-01T02:09:53+01:00</updated>
+  <updated>2014-12-01T02:14:56+01:00</updated>
   <id>http://blog.orestes.io</id>
   <author>
     <name></name>
@@ -28,7 +28,7 @@
     comes to my mind when I think of Times Square in NY or Shibuya in Tokyo is that look that reminds me of Blade
     Runner.&lt;/p&gt;
 
-&lt;img class=&quot;img-polaroid&quot; src=&quot;/media/2014/11/30/shibuya.jpg&quot;
+&lt;img class=&quot;img-polaroid&quot; src=&quot;http://blog.orestes.io/media/2014/11/30/shibuya.jpg&quot;
      alt=&quot;&amp;quot;Shibuya from Hikarie&amp;quot; by Héctor García&quot;
      title=&quot;&amp;quot;Shibuya from Hikarie&amp;quot; by Héctor García&quot;
         /&gt;
@@ -42,7 +42,7 @@
     I was eager to work on something I could walk by, point to and say, &quot;Hey, see that cool multimedia 6x4 videowall
     over there? Yeah, that&#39;s running software I wrote&quot;.&lt;/p&gt;
 
-&lt;img class=&quot;img-polaroid&quot; src=&quot;/media/2014/11/30/times_square.jpg&quot;
+&lt;img class=&quot;img-polaroid&quot; src=&quot;http://blog.orestes.io/media/2014/11/30/times_square.jpg&quot;
      alt=&quot;&amp;quot;Times Square2&amp;quot; by Javier Gutierrez Acedo&quot;
      title=&quot;&amp;quot;Times Square2&amp;quot; by Javier Gutierrez Acedo&quot;
         /&gt;
@@ -61,7 +61,7 @@
     bigger projects and clients and keep growing technologically.&lt;/p&gt;
 
 &lt;p&gt;
-    &lt;img class=&quot;img-polaroid use-right&quot; src=&quot;/media/2014/11/30/focusonemotions.png&quot; alt=&quot;Focus on Emotions&quot;
+    &lt;img class=&quot;img-polaroid use-right&quot; src=&quot;http://blog.orestes.io/media/2014/11/30/focusonemotions.png&quot; alt=&quot;Focus on Emotions&quot;
          title=&quot;Focus on Emotions&quot;/&gt; Almost five years, 85+ repos, 6 team mates and a whole lot of projects later, I
     feel really proud of our team. We&#39;ve worked on so many different things it doesn&#39;t compare to any other job I&#39;ve
     had. We&#39;ve done electronics integration, developed the first Digital Signage platform based on
@@ -84,7 +84,7 @@
     an informal setting was a nice experience. You get to know the people you work with in a more personal level. You
     don&#39;t see positions and responsibilities, you see new friends.&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;img-polaroid use-left&quot; src=&quot;/media/2014/11/30/altabox.png&quot; alt=&quot;Altabox&quot;
+&lt;p&gt;&lt;img class=&quot;img-polaroid use-left&quot; src=&quot;http://blog.orestes.io/media/2014/11/30/altabox.png&quot; alt=&quot;Altabox&quot;
         title=&quot;Altabox&quot;/&gt;After a couple of hours of corporate presentations we had lunch together. We mixed a bit, had some good laughs, there
     was some &lt;em&gt;impromptu&lt;/em&gt; performance by one of the most artistic team members, Dimas, and everyone seemed to be
     enjoying themselves. After lunch, we toured Altabox&#39;s facilities. The first thing that hit me when we were going to
@@ -109,7 +109,7 @@
     different spots and we had a lot of fun together. Flying back to Barcelona the next day I was pretty happy about the
     future of the company.&lt;/p&gt;
 
-&lt;img class=&quot;img-polaroid&quot; src=&quot;/media/2014/11/30/altabox-focusonemotions.jpg&quot; alt=&quot;&quot;/&gt;
+&lt;img class=&quot;img-polaroid&quot; src=&quot;http://blog.orestes.io/media/2014/11/30/altabox-focusonemotions.jpg&quot; alt=&quot;&quot;/&gt;
 
 &lt;p&gt;
     We&#39;re now ~35 people, we manage
@@ -150,13 +150,13 @@ The final product was a digital user stall/kiosk with an interactive touch scree
 a couple of tricky features: &lt;strong&gt;ID verification&lt;/strong&gt; and &lt;strong&gt;bank authorization&lt;/strong&gt;.
 &lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;img-polaroid&quot; src=&quot;/media/2013/07/21/16_ikea.jpg&quot; alt=&quot;&quot;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;img-polaroid&quot; src=&quot;http://blog.orestes.io/media/2013/07/21/16_ikea.jpg&quot; alt=&quot;&quot;/&gt;&lt;/p&gt;
 
 &lt;p&gt;This was not our first rodeo and we had another public
 &lt;a target=&quot;_blank&quot; href=&quot;http://w110.bcn.cat/portal/site/Ajuntament/menuitem.38c1cee3a16e78f040f740f7a2ef8a0c/?vgnextoid=0023204c1a071310VgnVCM10000074fea8c0RCRD&amp;vgnextchannel=0023204c1a071310VgnVCM10000074fea8c0RCRD&amp;lang=ca_ES&quot;&gt;kiosk/stall project for &lt;strong&gt;the city hall, Ajuntament de Barcelona&lt;/strong&gt;&lt;/a&gt; which allow citizens to do paperwork. They were challenging because we had to integrate lots
 of different providers, but we didn&#39;t manage any banking data so this was new to us. These projects had been running
 smoothly for years and we&#39;ve got some recognition from them.
-&lt;img class=&quot;img-polaroid use-left inside-text&quot; src=&quot;/media/2013/07/21/quioscmp.jpg&quot; width=&quot;23%&quot;/&gt;
+&lt;img class=&quot;img-polaroid use-left inside-text&quot; src=&quot;http://blog.orestes.io/media/2013/07/21/quioscmp.jpg&quot; width=&quot;23%&quot;/&gt;
 &lt;/p&gt;
 
 &lt;p&gt;A couple of weeks after the project&#39;s launch we had gotten many reports of users being disoriented when following
@@ -183,7 +183,7 @@ its state. You can find it on &lt;strong&gt;RobotShop&lt;/strong&gt;,
 &lt;p&gt;&lt;img class=&quot;img-polaroid use-right&quot; src=&quot;http://www.robotshop.com/content/images/devantech-2-channel-usb-relay-large.jpg&quot; width=&quot;23%&quot; alt=&quot;&quot;/&gt;&lt;/p&gt;
 
 &lt;p&gt;
-I got a hold of the &lt;a target=&quot;_blank&quot; href=&quot;http://www.robotshop.com/content/PDF/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf&quot;&gt;controller&#39;s specification&lt;/a&gt; [&lt;a href=&quot;/media/2013/07/21/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf&quot;&gt;mirror&lt;/a&gt;] and wrote a simple
+I got a hold of the &lt;a target=&quot;_blank&quot; href=&quot;http://www.robotshop.com/content/PDF/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf&quot;&gt;controller&#39;s specification&lt;/a&gt; [&lt;a href=&quot;http://blog.orestes.io/media/2013/07/21/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf&quot;&gt;mirror&lt;/a&gt;] and wrote a simple
 program to control it over USB by sending the byte-encoded messages for each action (open/close relay 1/2). It consisted
 of a minimal Windows Forms interface with a few buttons to open/close the USB port and switching on/off the relays.
 When I was sure I could make it work, I wrote a small function library and compiled it as an ActiveX:&lt;br/&gt;
@@ -219,7 +219,7 @@ Neat! I love the clicking sound from the relays, so mechanical :D&lt;/p&gt;
         &lt;li&gt;&lt;a target=&quot;_blank&quot; href=&quot;http://msdn.microsoft.com/en-us/library/aa751977(v=vs.85).aspx&quot;&gt;Safe Initialization and Scripting for ActiveX Controls&lt;/a&gt; on &lt;strong&gt;MSDN&lt;/strong&gt;.&lt;/li&gt;
         &lt;li&gt;&lt;a target=&quot;_blank&quot; href=&quot;http://focusonemotions.com/web/en/projects.html/sector_publico_sectores&quot;&gt;Public Sector clients&lt;/a&gt; at &lt;strong&gt;Focus On Emotions&lt;/strong&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a target=&quot;_blank&quot; href=&quot;http://www.robotshop.com/productinfo.aspx?pc=RB-Dev-35&quot;&gt;Devantech 2 Channel USB Relay&lt;/a&gt; at &lt;strong&gt;RobotShop&lt;/strong&gt;.&lt;/li&gt;
-        &lt;li&gt;&lt;a target=&quot;_blank&quot; href=&quot;http://www.robotshop.com/content/PDF/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf&quot;&gt;USB-RLY02 module specification&lt;/a&gt; at &lt;strong&gt;RobotShop&lt;/strong&gt;. [&lt;a href=&quot;/media/2013/07/21/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf&quot;&gt;mirror&lt;/a&gt;]&lt;/li&gt;
+        &lt;li&gt;&lt;a target=&quot;_blank&quot; href=&quot;http://www.robotshop.com/content/PDF/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf&quot;&gt;USB-RLY02 module specification&lt;/a&gt; at &lt;strong&gt;RobotShop&lt;/strong&gt;. [&lt;a href=&quot;http://blog.orestes.io/media/2013/07/21/usb-rly02-2-relay-outputs-at-16a-usb-rly02.pdf&quot;&gt;mirror&lt;/a&gt;]&lt;/li&gt;
     &lt;/ul&gt;
 &lt;/p&gt;</content>
   </entry>
@@ -382,7 +382,7 @@ the ones playing Ingress. &lt;/p&gt;
 &lt;p&gt;I found a few cool pictures while googling around and I wanted to save some for later, but I accidentally saved this
 one as a .html file and that&#39;s when things got weird.&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;img-polaroid&quot; src=&quot;/media/2012/12/10/niantic-930x454.jpg&quot; alt=&quot;&quot;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;img-polaroid&quot; src=&quot;http://blog.orestes.io/media/2012/12/10/niantic-930x454.jpg&quot; alt=&quot;&quot;/&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Try and do it yourself.&lt;/strong&gt; Save this image to your local disk, and rename it to from &lt;code&gt;.jpg&lt;/code&gt;
 to &lt;code&gt;.html&lt;/code&gt;. When you open it in your browser, it will look almost the same, but you&#39;ll notice that your
@@ -510,8 +510,8 @@ containing his solutions to problems and some video explanations.
     <content type="html">
 
 &lt;p style=&quot;text-align: center&quot;&gt;
-    &lt;img src=&quot;/media/2012/11/14/smart-city-expo.png&quot; alt=&quot;Barcelona Smart City Expo World Congress 2012&quot; title=&quot;Barcelona Smart City Expo World Congress 2012&quot; width=&quot;295&quot; /&gt;
-    &lt;img src=&quot;/media/2012/11/14/nfc-bootcamp.png&quot; alt=&quot;NFC Bootcamp&quot; title=&quot;NFC Bootcamp&quot; width=&quot;300&quot; /&gt;
+    &lt;img src=&quot;http://blog.orestes.io/media/2012/11/14/smart-city-expo.png&quot; alt=&quot;Barcelona Smart City Expo World Congress 2012&quot; title=&quot;Barcelona Smart City Expo World Congress 2012&quot; width=&quot;295&quot; /&gt;
+    &lt;img src=&quot;http://blog.orestes.io/media/2012/11/14/nfc-bootcamp.png&quot; alt=&quot;NFC Bootcamp&quot; title=&quot;NFC Bootcamp&quot; width=&quot;300&quot; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;The &lt;a href=&quot;https://www.nfcbootcamp.com/event-registration/?ee=22&quot;&gt;NFC Bootcamp Barcelona 2012&lt;/a&gt; was held as
@@ -535,7 +535,7 @@ them. He also talked briefly about the hardware which provides NFC capabilities 
 built-in NFC tech.&lt;/p&gt;
 
 &lt;p&gt;
-&lt;img src=&quot;/media/2012/11/14/typo.jpg&quot; class=&quot;img-polaroid use-left&quot; alt=&quot;The accreditation&quot; title=&quot;The accreditation&quot; /&gt;
+&lt;img src=&quot;http://blog.orestes.io/media/2012/11/14/typo.jpg&quot; class=&quot;img-polaroid use-left&quot; alt=&quot;The accreditation&quot; title=&quot;The accreditation&quot; /&gt;
 Just before lunch, we met Stéphane Doutriaux from
 &lt;a href=&quot;http://www.poken.com/&quot; title=&quot;Poken&quot; target=&quot;_blank&quot;&gt;Poken&lt;/a&gt;. He made a brief introduction about
 &lt;strong&gt;Poken&lt;/strong&gt; with a video. Afterwards we all got our own pokens and did a little tour of the reception
@@ -557,7 +557,7 @@ His talk was going to be more focused on de technical/developer side of NFC but 
 being not so technical that part was skipped. Bummer.&lt;/p&gt;
 
 &lt;p&gt;
-    &lt;img src=&quot;/media/2012/11/14/evil-robot.jpg&quot; alt=&quot;&quot; title=&quot;The Fernando-bot&quot; class=&quot;img-polaroid use-left&quot;/&gt;
+    &lt;img src=&quot;http://blog.orestes.io/media/2012/11/14/evil-robot.jpg&quot; alt=&quot;&quot; title=&quot;The Fernando-bot&quot; class=&quot;img-polaroid use-left&quot;/&gt;
     Before lunch, we went for a walk around the Smart City Expo and Fernando was captured by an evil robot.
     After we rescued him, Fernando gave a more technical explanation of the NFC components, the different NDEF
     well known formats and the read/writing permissions.
@@ -571,7 +571,7 @@ being not so technical that part was skipped. Bummer.&lt;/p&gt;
     Then Stéphane came back and we participated in a workshop with Poken and their partner tools. We created a campaign
     and linked a Poken Tag using the NFC Reader/Writer. We also learned a bit more about the technology used in Poken.
     The Poken tags use the same technology as the regular Pokens.
-    &lt;img src=&quot;/media/2012/11/14/poken-tag.jpg&quot; alt=&quot;Poken Tag&quot; title=&quot;Poken Tag&quot; class=&quot;img-polaroid use-right&quot;/&gt;
+    &lt;img src=&quot;http://blog.orestes.io/media/2012/11/14/poken-tag.jpg&quot; alt=&quot;Poken Tag&quot; title=&quot;Poken Tag&quot; class=&quot;img-polaroid use-right&quot;/&gt;
     They use a &lt;strong&gt;Swatch&lt;/strong&gt; licensed
     chip with added NFC capabilities and a full USB stack,powered by a 9 volt battery that lasts about two years.
     Everything is encased in silicon so its fairly resistant, and of course, it&#39;s sticky. Poken Tags have to be
