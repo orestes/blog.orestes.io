@@ -13,7 +13,7 @@ ga_tracking_code: UA-34829303-1
 ga_domain: blog.orestes.io
 
 url: http://blog.orestes.io
-media_url: /media
+media_url: http://blog.orestes.io/media
 source_url: http://github.com/orestes/blog.orestes.io
 title: Orestes Carracedo
 
