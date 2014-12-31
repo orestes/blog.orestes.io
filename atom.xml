@@ -3,12 +3,54 @@
   <title>Orestes Carracedo</title>
   <link href="http://blog.orestes.io/atom.xml" rel="self" />
   <link href="http://blog.orestes.io" />
-  <updated>2014-12-31T16:38:10+00:00</updated>
+  <updated>2014-12-31T17:06:31+00:00</updated>
   <id>http://blog.orestes.io</id>
   <author>
     <name></name>
     <email>orestes.ca@gmail.com</email>
   </author>
+  
+  <entry>
+    <title>Shortcuts</title>
+    <link href="http://blog.orestes.io/archive/2014/12/31/shortcuts"/>
+    <updated>2014-12-31T00:00:00+00:00</updated>
+    <id>http://blog.orestes.io/archive/2014/12/31/shortcuts</id>
+    <content type="html">
+
+&lt;p&gt;
+I love shortcuts. Specifically, keyboard shortcuts. Quick keystrokes that invoke
+ commands and menu options. I couldn't live without them. But that's me. It seems
+ normal that  people don't use them at all save for &lt;code&gt;CTRL+C&lt;/code&gt; and 
+&lt;code&gt;CTRL+V&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+One of the main goals as developers is automating repetitive and error-prone 
+tasks. There's very few things that can get as repetitive as clicking OK 
+or Cancel on dialogs, checking boxes or navigating between form fields. And yet,
+ very few people use &lt;code&gt;Tab&lt;/code&gt; or &lt;code&gt;Shift+Tab&lt;/code&gt; to navigate 
+between form fields, &lt;code&gt;Space&lt;/code&gt; to check checkboxes and 
+&lt;code&gt;Enter&lt;/code&gt; or &lt;code&gt;Escape&lt;/code&gt; to accept o dismiss dialogs. I can 
+totally understand that the average computer user won't get used to this, but 
+I can't respect a developer that doesn't know his tools. And that doesn't mean
+ you have to be an Emacs guru, but regardless of your tool of choice, you 
+better show me your skills when I'm interviewing you.
+&lt;/p&gt;
+
+&lt;p&gt;That's what 
+this is all about; mastering your tools. I don't care that much about the particular
+tool as long as you prove that you know it inside out. I'm not the only one who thinks on 
+this vein. I recently read &lt;a target=&quot;_blank&quot; href=&quot;http://www.nicolasbize.com/blog/the-best-ide-in-the-world/&quot;&gt;the best IDE in the world&lt;/a&gt; by Nichas Bize and I found myself bobbing my head in agreement all along.
+&lt;/p&gt;
+
+&lt;p&gt;
+    &lt;strong&gt;Links&lt;/strong&gt;:
+&lt;ul&gt;
+    &lt;li&gt;&lt;a target=&quot;_blank&quot; href=&quot;http://www.nicolasbize.com/blog/the-best-ide-in-the-world/&quot;&gt;The Best IDE in the World&lt;/a&gt; by Nicolas Bize.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>A new chapter</title>
