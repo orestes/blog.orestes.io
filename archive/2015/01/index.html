@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>Archive / Orestes Carracedo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="" />
+    <link href="http://feeds.feedburner.com/orestes/blog" rel="alternate" title="Orestes Carracedo" type="application/atom+xml" />
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/css/blog.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/css/syntax.css" media="all" />
+</head>
+<body>
+
+<!-- content -->
+    <div class="grid main">
+    <div class="row-fluid">
+        <div class="span9">
+            <!-- header -->
+<div class="header">
+    <h2 style="margin-bottom: 0px"><a href="/">Orestes Carracedo</a></h2>
+    <h6 style="margin-top: 0px">Scrum Master, PHP Ninja, cat owner</h6>
+</div>
+<!-- / header -->
+
+
+            <!-- page-content-->
+            <h4>1 post(s) archived on January 2015.</h4>
+
+<article class="posts">
+    
+    
+    
+    <!-- post -->
+<div class="post">
+    <div class="title"><a href="/archive/2015/01/14/faceook-hacker-cup">Facebook Hacker Cup</a></div>
+    <div class="date"><i class="icon-calendar-empty"></i> 14 January 2015</div>
+    <div class="content">
+
+<p>
+I've been entering Facebook's Hacker Cup for a few years now. Some years I've gotten past a couple of rounds, others I haven't done so well. Anyways, I really like participating and I decided to share my setup.
+</p>
+
+<p>I use the same structure for every problem so I can be more efficient. Every problem:</p>
+
+<ul class="task-list">
+<li>Is in a directory named using the point value and the problem name, like <strong>30 Balanced smileys</strong>.</li>
+<li>Contains a readme file with the full description of the problem.</li>
+<li>Contains an <code>example</code> directory with the input and output files provided in the problem description.</li>
+<li>The <code>data</code> directory contains the generated input provided for the submission.</li>
+<li>The <code>generated</code> directory contains the output generated for the submission.</li>
+</ul>
+
+<h4>The tight loop</h4>
+
+<p>I'm using the simplest quickest feedback loop I could come up with:</p>
+
+<ol class="task-list">
+<li>Run the program piping in the input from the example file and piping out the output to an output file.</li>
+<li>Diff the generated output file against the expected output file.</li>
+<li>Repeat</li>
+</ol>
+
+<p>An example using php: </p>
+
+<pre><code>watch -n 1 "php solve.php &lt; example/input.txt &gt; output.txt &amp;&amp; diff example/output.txt output.txt"
+</code></pre>
+
+<p>Using python:</p>
+
+<pre><code>watch -n 1 "python solve.py &lt; example/input.txt &gt; output.txt &amp;&amp; diff example/output.txt output.txt"
+</code></pre>
+
+<p>I usually have this running in a session, and code in a different one. I like running the code very second and not relying on file watchers</p>
+<p><p><img src="http://blog.orestes.io/media/2015/01/14/solving.png"></p>
+
+<h4>What I often do wrong</h4>
+<p>This time I entered the qualifying round the last day. I ignored my calendar events for the day when I shouldn't. As a result, I entered the round feeling in a hurry and didn't concentrate as much as I should've.</p>
+<p>In past editions I've overlooked the constraints and tested the code using simple scenarios. The problem comes when the generated input hits the constraint limits and my code is not optimized at all, taking a lot of time to perform the calculations and making me fail the problem.</p>
+<p>Another mistake I made was preparing only one problem. Chances are I'm going to be fail to think about every scenario and fail the problem. Solving (or at least trying to) all the round's problems should always be the way to participate.</p>
+
+<p>
+    <strong>Links</strong>:
+<ul>
+    <li><a target="_blank" href="https://github.com/orestes/facebook-hacker-cup">orestes/facebook-hacker-cup</a> on GitHub.</li>
+</ul>
+</p>
+</div>
+    <div class="categories clearfix"><i class="icon-folder-close"></i> Categories:  <a href="/category/programming">programming</a> </div>
+    <div class="tags"><i class="icon-tag"></i> Tags:  <a href="/tag/programming">programming</a>  <a href="/tag/hacker">hacker</a>  <a href="/tag/cup">cup</a>  <a href="/tag/facebook">facebook</a> </div>
+    
+    <div class="comments"><i class="icon-comment-alt"></i> Comments: <a href="/archive/2015/01/14/faceook-hacker-cup#disqus_thread">--</a></div>
+    
+</div>
+<!-- /post -->
+
+    
+</article> <!-- /posts -->
+
+            <!-- /page-content-->
+
+        </div>
+
+        <aside class="span3 sidebar">
+            <!-- sidebar -->
+<h5> </h5>
+<ul class="links">
+    <li style="margin-left: -5px"><img src="http://orestescarracedo.com/favicon.ico" alt=""/> <a target="_blank" href="http://orestescarracedo.com">About me</a></li>
+    <li><i class="icon-rss"></i> <a target="_blank" href="http://feeds.feedburner.com/orestes/blog">Subscribe</a></li>
+</ul>
+
+<h5>Social</h5>
+<ul class="links">
+    <li><i class="icon-twitter"></i> <a target="_blank" href="http://twitter.com/OrestesCA">Twitter</a></li>
+    <li><i class="icon-github"></i> <a target="_blank" href="https://github.com/orestes">GitHub</a></li>
+    <li><i class="icon-google-plus"></i> <a target="_blank" href="https://plus.google.com/u/0/101089646875098775879/posts">Google +</a></li>
+    <li><i class="icon-linkedin"></i> <a target="_blank" href="http://es.linkedin.com/in/orestesca">LinkedIn</a></li>
+</ul>
+
+<h5><i class="icon-calendar"></i>&nbsp;&nbsp;<a href="/archive.html">Archive</a></h5>
+<ul class="links year">
+    
+    <li class="title">2015</li>
+    <li>
+        <ul class="links month">
+            
+            <li>1 <a href="/archive/2015/01/">January</a></li>
+            
+        </ul>
+    </li>
+    
+    <li class="title">2014</li>
+    <li>
+        <ul class="links month">
+            
+            <li>1 <a href="/archive/2014/12/">December</a></li>
+            
+            <li>1 <a href="/archive/2014/11/">November</a></li>
+            
+        </ul>
+    </li>
+    
+    <li class="title">2013</li>
+    <li>
+        <ul class="links month">
+            
+            <li>1 <a href="/archive/2013/07/">July</a></li>
+            
+            <li>1 <a href="/archive/2013/06/">June</a></li>
+            
+            <li>1 <a href="/archive/2013/04/">April</a></li>
+            
+        </ul>
+    </li>
+    
+    <li class="title">2012</li>
+    <li>
+        <ul class="links month">
+            
+            <li>2 <a href="/archive/2012/12/">December</a></li>
+            
+            <li>4 <a href="/archive/2012/11/">November</a></li>
+            
+            <li>1 <a href="/archive/2012/07/">July</a></li>
+            
+            <li>1 <a href="/archive/2012/06/">June</a></li>
+            
+            <li>1 <a href="/archive/2012/04/">April</a></li>
+            
+        </ul>
+    </li>
+    
+    <li class="title">2011</li>
+    <li>
+        <ul class="links month">
+            
+            <li>1 <a href="/archive/2011/12/">December</a></li>
+            
+        </ul>
+    </li>
+    
+</ul>
+<!-- /sidebar -->
+
+        </aside>
+    </div>
+</div>
+
+<div class="grid main">
+    <div class="row-fluid">
+        <div class="span9 footer"><!-- footer -->
+© 2010 - 2013 Orestes Carracedo. <a href="http://github.com/orestes/blog.orestes.io">Source code</a>.<br/>
+All content is under <a href="/LICENSE">MIT License</a> unless otherwise specified.
+<!-- /footer -->
+</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var disqus_shortname = 'orestes';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<!-- /content -->
+
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-34829303-1', 'blog.orestes.io');
+    ga('send', 'pageview');
+    </script>
+</body>
+</html>
