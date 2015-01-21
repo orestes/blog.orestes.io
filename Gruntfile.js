@@ -20,9 +20,7 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('build', [
-        // Collection of tasks that build code to the 'dist' directory...
-    ]);
+    grunt.registerTask('deploy', ['buildcontrol:pages']);
 
     grunt.loadNpmTasks('grunt-build-control');
 };
