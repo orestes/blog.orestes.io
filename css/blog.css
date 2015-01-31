@@ -8,6 +8,7 @@ body {
     background-image: url('/assets/grey.png');
     font-size: 1em;
     line-height: 1.6em;
+    margin-left: 1em;
 }
 
 div.highlight {
