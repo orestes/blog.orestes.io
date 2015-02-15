@@ -3,12 +3,173 @@
   <title>Orestes Carracedo</title>
   <link href="http://blog.orestes.io/atom.xml" rel="self" />
   <link href="http://blog.orestes.io" />
-  <updated>2015-02-01T22:04:38+00:00</updated>
+  <updated>2015-02-15T22:58:14+00:00</updated>
   <id>http://blog.orestes.io</id>
   <author>
     <name></name>
     <email>orestes.ca@gmail.com</email>
   </author>
+  
+  <entry>
+    <title>Learning</title>
+    <link href="http://blog.orestes.io/archive/2015/02/15/learning"/>
+    <updated>2015-02-15T00:00:00+00:00</updated>
+    <id>http://blog.orestes.io/archive/2015/02/15/learning</id>
+    <content type="html">
+
+&lt;p&gt;I've been reviewing my progress over the past five years in Barcelona and Focus On Emotions. There's a ton of stuff that I've put into practice since I moved here. Most of this would be a bit overkill for simple projects, but I consider these practices are vital for any project involving more than one developer. All of these techniques were put to practice in personal projects first, and then brought into my regular job as Director of Software Development. Having a team to work together through the issues we found implementing these was really helpful.&lt;/p&gt;
+
+
+&lt;h3&gt;What I've learned&lt;/h3&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Software Configuration Management&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;We checked every project into Version Control and applied a bunch of SCM related practices. We switched from &lt;strong&gt;Subversion&lt;/strong&gt; to &lt;strong&gt;Git&lt;/strong&gt; in 2011. There were many reasons, easier security handling, speed and Git's decentralized model being some of them. &lt;/p&gt;
+
+
+&lt;p&gt;We still used a golden repo where every other working copy was pushed to at the end of the day, or when we're kicking off an integration. That repo also pushed the changes to &lt;strong&gt;Bitbucket&lt;/strong&gt; via a the Git &lt;em&gt;post-receive&lt;/em&gt; hook. We've been using Bitbucket as a collaboration and visualization tool rather than a SCM storage service.&lt;/p&gt;
+
+
+&lt;p&gt;Along the way, we also adopted &lt;strong&gt;&lt;a href=&quot;http://semver.org&quot;&gt;Semver&lt;/a&gt;&lt;/strong&gt; as the sane guidelines for release versioning. Semver adoption is now almost the de-facto standard, at least for Open Source projects.&lt;/p&gt;
+
+
+&lt;p&gt;We also had a few different strategies to deal with branching. We opted to implement the wildly known &lt;strong&gt;&lt;a href=&quot;http://nvie.com/posts/a-successful-git-branching-model/&quot;&gt;git-flow&lt;/a&gt;&lt;/strong&gt; and I doubt I would've ever need anything more complicated&lt;/p&gt;
+
+
+&lt;p&gt;The systems we worked on relied heavily on progressive enhancement. Both on the implementation and on the feature releasing cycle. We used a &lt;strong&gt;feature toggling&lt;/strong&gt; approach for every new feature&lt;/p&gt;
+
+
+&lt;p&gt;For Open Source projects, &lt;a href=&quot;https://github.com/&quot;&gt;GitHub&lt;/a&gt; is typically used as the SCM storage and collaboration platform. &lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Software Quality Assurance&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;Measuring Software Quality in metrics. I'm not talking about code coverage, but about cyclomatic complexity, deep of inheritance tree, object coupling... Most of the metrics were provided by &lt;strong&gt;&lt;a href=&quot;http://pdepend.org/documentation/software-metrics/index.html&quot;&gt;PHP Depend&lt;/a&gt;&lt;/strong&gt;, generated in our build process on &lt;strong&gt;Jenkins&lt;/strong&gt;.&lt;/p&gt;
+
+
+&lt;p&gt;For Open Source projects, &lt;a href=&quot;https://codeclimate.com&quot;&gt;Code Climate&lt;/a&gt; provides a great service. &lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Testing&lt;/strong&gt; &lt;/p&gt;
+
+
+&lt;p&gt;I spent my first years as a developer without writing a single test. The commitment to make code clean, understandable and reliable was only fulfilled when we managed to test every project we started. We did unit testing, end-to-end testing on some of the apps that relied heavily on the user interaction and acceptance testing using &lt;strong&gt;&lt;a href=&quot;http://behat.readthedocs.org/en/v2.5/quick_intro.html&quot;&gt;Behat&lt;/a&gt;&lt;/strong&gt; for BDD. &lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Continuous Integration&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;We did CI on the &lt;em&gt;development&lt;/em&gt; and &lt;em&gt;master&lt;/em&gt; branches of our apps. We set up a local &lt;strong&gt;&lt;a href=&quot;http://jenkins-ci.org/&quot;&gt;Jenkins&lt;/a&gt;&lt;/strong&gt; server, using a computer monitor with loudspeakers. The monitor would feature a carousel of wall display lists of the jobs, alternating between the development and the stable branches. Different changes of the build states would trigger different sounds. The quick feedback from the CI system made us be more confident in our code than ever. &lt;/p&gt;
+
+
+&lt;p&gt;Open Source projects usually run their CI in &lt;a href=&quot;https://travis-ci.org/&quot;&gt;Travis CI&lt;/a&gt;&lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;DevOps&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;The set of practices meant to easy up and speed the deployment of new versions of our projects.
+
+
+We switched from manually created VMs in VirtualBox to &lt;strong&gt;&lt;a href=&quot;https://www.vagrantup.com/&quot;&gt;Vagrant&lt;/a&gt;&lt;/strong&gt;-managed VMs, provisioned by &lt;strong&gt;&lt;a href=&quot;https://docs.puppetlabs.com/&quot;&gt;Puppet&lt;/a&gt;&lt;/strong&gt;. Bringing up a new machine to test a new configuration or deploy a different environment for another app took now a couple of minutes, instead of hours (and multiple human errors).&lt;/p&gt;
+
+
+&lt;p&gt;We also wrote deployment automation tools using &lt;strong&gt;&lt;a href=&quot;http://ant.apache.org/&quot;&gt;Apache ant&lt;/a&gt;&lt;/strong&gt;, then moved to &lt;strong&gt;&lt;a href=&quot;https://www.phing.info/&quot;&gt;Phing&lt;/a&gt;&lt;/strong&gt; then moved to &lt;strong&gt;&lt;a href=&quot;http://gruntjs.com/&quot;&gt;Grunt&lt;/a&gt;&lt;/strong&gt;.&lt;/p&gt;
+
+
+&lt;h3&gt;How I learned&lt;/h3&gt;
+
+
+&lt;p&gt;Most of this stuff I learned by reading a lot. I've tried to step up my game in these years and I managed to find more sources of knowledge than I could possibly manage.&lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Sources&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;My primary sources is always the Internet. Sites like &lt;strong&gt;&lt;a href=&quot;https://news.ycombinator.com/&quot;&gt;Hacker News&lt;/a&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;a href=&quot;http://www.reddit.com/&quot;&gt;Reddit&lt;/a&gt;&lt;/strong&gt; and a carefully curated collection of blogs that I read via &lt;strong&gt;&lt;a href=&quot;https://feedly.com/&quot;&gt;Feedly&lt;/a&gt;&lt;/strong&gt;. &lt;strong&gt;&lt;a href=&quot;http://twitter.com&quot;&gt;Twitter&lt;/a&gt;&lt;/strong&gt; is also fantastic, if you follow the active people in your community.&lt;/p&gt;
+
+
+&lt;p&gt;Podcasts are another great way to stay up to date. They're perfect for commuting.&lt;/p&gt;
+
+
+&lt;p&gt;Books are fundamental. No matter how insightful a blog post or podcast might be, they always reference written material. There are a lot of must reads in our field, so I started as early as I could.&lt;/p&gt;
+
+
+&lt;p&gt;Conferences and meetups are perfect for networking, speaking to other developers and share. I've tested the waters myself by giving a couple of talks in the past years and I must say that, even frightening, it's a lot of fun and you get to help out other developers. &lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Practice&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;Thoughtful, carefully prepared practice of everything you learn is critical. It's just not enough to read and vaguely retain the information. To truly understand, we must apply whatever we're learning.&lt;/p&gt;
+
+
+&lt;blockquote&gt;
+
+
+&lt;p&gt;Tell me and I forget, teach me and I may remember, involve me and I learn. &lt;/p&gt;
+
+
+&lt;p&gt;― Benjamin Franklin&lt;/p&gt;
+
+
+&lt;/blockquote&gt;
+
+
+&lt;p&gt;Pet projects are a great way to practice. they work out even better if you collaborate with others. One of the potential pitfalls of pet projects is taking things too seriously. Remember, you're learning, getting better at something specific. The goal isn't for your pet project to be popular, grow into a company and get bought by Google. You're just learning, take it easy. Usually, it doesn't even matter if your pet project sees the light and gets released into the public. Keep in mind though that having a long list of unfinished &lt;em&gt;ideas&lt;/em&gt; can be demoralizing. In time, I learned to downsize the complexity of my ideas and only released small things that I was ok with.&lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Empathy&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;Put yourself in the position of the rest of your team. Try to think like they think, to understand their problems and help them.&lt;/p&gt;
+
+
+&lt;p&gt;I've always liked to know as much as possible about the platform running my software. When I started as a freelance software developer, my websites and webapps where running in a shared hosting environment. The amount of problems and frustration made me realize how hard it is to be a good Systems Administrator. I moved all my clients into VMs. This meant I was now doing Systems Administration too, but it provided me with a ton of learning experiences.&lt;/p&gt;
+
+
+&lt;p&gt;The same goes for frontend development, mobile, etc...&lt;/p&gt;
+
+
+&lt;h3&gt;What I still have to learn&lt;/h3&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Continuous deployment&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;I've never had the opportunity to work in a project when I could release as often as we made changes. I'm looking forward to doing so.&lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Test-Driven Development&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;It's easier said than done. TDD requires a certain level of work stability, self-discipline and focus I've just never been able to find. I'm making an effort to change this. &lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Domain-Driven Development&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;Such a huge topic. Digging into DDD feels like going down the rabbit hole. This paradigm could very well be as big as the &lt;strong&gt;Agile&lt;/strong&gt; methodologies have been.&lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Mobility&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;Even though we worked in a few Mobile projects, all of them where part of the Digital Signage platform we built. I'd love to work on a project where the mobile client is the main focus.&lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;High scalability&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;None of the projects I've worked have reached the numbers that high traffic systems support nowadays. Millions of daily active users. That's a whole new level, and I want to reach that.&lt;/p&gt;
+
+
+
+</content>
+  </entry>
   
   <entry>
     <title>Leaving Focus On Emotions</title>
