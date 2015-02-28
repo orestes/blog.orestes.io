@@ -1,0 +1,153 @@
+
+
+<p>I've been reviewing my progress over the past five years in Barcelona and Focus On Emotions. There's a ton of stuff that I've put into practice since I moved here. Most of this would be a bit overkill for simple projects, but I consider these practices are vital for any project involving more than one developer. All of these techniques were put to practice in personal projects first, and then brought into my regular job as Director of Software Development. Having a team to work together through the issues we found implementing these was really helpful.</p>
+
+
+<h3>What I've learned</h3>
+
+
+<p><strong>Software Configuration Management</strong></p>
+
+
+<p>We checked every project into Version Control and applied a bunch of SCM related practices. We switched from <strong>Subversion</strong> to <strong>Git</strong> in 2011. There were many reasons, easier security handling, speed and Git's decentralized model being some of them. </p>
+
+
+<p>We still used a golden repo where every other working copy was pushed to at the end of the day, or when we're kicking off an integration. That repo also pushed the changes to <strong>Bitbucket</strong> via a the Git <em>post-receive</em> hook. We've been using Bitbucket as a collaboration and visualization tool rather than a SCM storage service.</p>
+
+
+<p>Along the way, we also adopted <strong><a href="http://semver.org">Semver</a></strong> as the sane guidelines for release versioning. Semver adoption is now almost the de-facto standard, at least for Open Source projects.</p>
+
+
+<p>We also had a few different strategies to deal with branching. We opted to implement the wildly known <strong><a href="http://nvie.com/posts/a-successful-git-branching-model/">git-flow</a></strong> and I doubt I would've ever need anything more complicated</p>
+
+
+<p>The systems we worked on relied heavily on progressive enhancement. Both on the implementation and on the feature releasing cycle. We used a <strong>feature toggling</strong> approach for every new feature</p>
+
+
+<p>For Open Source projects, <a href="https://github.com/">GitHub</a> is typically used as the SCM storage and collaboration platform. </p>
+
+
+<p><strong>Software Quality Assurance</strong></p>
+
+
+<p>Measuring Software Quality in metrics. I'm not talking about code coverage, but about cyclomatic complexity, deep of inheritance tree, object coupling... Most of the metrics were provided by <strong><a href="http://pdepend.org/documentation/software-metrics/index.html">PHP Depend</a></strong>, generated in our build process on <strong>Jenkins</strong>.</p>
+
+
+<p>For Open Source projects, <a href="https://codeclimate.com">Code Climate</a> provides a great service. </p>
+
+
+<p><strong>Testing</strong> </p>
+
+
+<p>I spent my first years as a developer without writing a single test. The commitment to make code clean, understandable and reliable was only fulfilled when we managed to test every project we started. We did unit testing, end-to-end testing on some of the apps that relied heavily on the user interaction and acceptance testing using <strong><a href="http://behat.readthedocs.org/en/v2.5/quick_intro.html">Behat</a></strong> for BDD. </p>
+
+
+<p><strong>Continuous Integration</strong></p>
+
+
+<p>We did CI on the <em>development</em> and <em>master</em> branches of our apps. We set up a local <strong><a href="http://jenkins-ci.org/">Jenkins</a></strong> server, using a computer monitor with loudspeakers. The monitor would feature a carousel of wall display lists of the jobs, alternating between the development and the stable branches. Different changes of the build states would trigger different sounds. The quick feedback from the CI system made us be more confident in our code than ever. </p>
+
+
+<p>Open Source projects usually run their CI in <a href="https://travis-ci.org/">Travis CI</a></p>
+
+
+<p><strong>DevOps</strong></p>
+
+
+<p>The set of practices meant to easy up and speed the deployment of new versions of our projects.
+
+
+We switched from manually created VMs in VirtualBox to <strong><a href="https://www.vagrantup.com/">Vagrant</a></strong>-managed VMs, provisioned by <strong><a href="https://docs.puppetlabs.com/">Puppet</a></strong>. Bringing up a new machine to test a new configuration or deploy a different environment for another app took now a couple of minutes, instead of hours (and multiple human errors).</p>
+
+
+<p>We also wrote deployment automation tools using <strong><a href="http://ant.apache.org/">Apache ant</a></strong>, then moved to <strong><a href="https://www.phing.info/">Phing</a></strong> then moved to <strong><a href="http://gruntjs.com/">Grunt</a></strong>.</p>
+
+
+<h3>How I learned</h3>
+
+
+<p>Most of this stuff I learned by reading a lot. I've tried to step up my game in these years and I managed to find more sources of knowledge than I could possibly manage.</p>
+
+
+<p><strong>Sources</strong></p>
+
+
+<p>My primary sources is always the Internet. Sites like <strong><a href="https://news.ycombinator.com/">Hacker News</a></strong>, <strong><a href="http://www.reddit.com/">Reddit</a></strong> and a carefully curated collection of blogs that I read via <strong><a href="https://feedly.com/">Feedly</a></strong>. <strong><a href="http://twitter.com">Twitter</a></strong> is also fantastic, if you follow the active people in your community.</p>
+
+
+<p>Podcasts are another great way to stay up to date. They're perfect for commuting.</p>
+
+
+<p>Books are fundamental. No matter how insightful a blog post or podcast might be, they always reference written material. There are a lot of must reads in our field, so I started as early as I could.</p>
+
+
+<p>Conferences and meetups are perfect for networking, speaking to other developers and share. I've tested the waters myself by giving a couple of talks in the past years and I must say that, even frightening, it's a lot of fun and you get to help out other developers. </p>
+
+
+<p><strong>Practice</strong></p>
+
+
+<p>Thoughtful, carefully prepared practice of everything you learn is critical. It's just not enough to read and vaguely retain the information. To truly understand, we must apply whatever we're learning.</p>
+
+
+<blockquote>
+
+
+<p>Tell me and I forget, teach me and I may remember, involve me and I learn. </p>
+
+
+<p>― Benjamin Franklin</p>
+
+
+</blockquote>
+
+
+<p>Pet projects are a great way to practice. they work out even better if you collaborate with others. One of the potential pitfalls of pet projects is taking things too seriously. Remember, you're learning, getting better at something specific. The goal isn't for your pet project to be popular, grow into a company and get bought by Google. You're just learning, take it easy. Usually, it doesn't even matter if your pet project sees the light and gets released into the public. Keep in mind though that having a long list of unfinished <em>ideas</em> can be demoralizing. In time, I learned to downsize the complexity of my ideas and only released small things that I was ok with.</p>
+
+
+<p><strong>Empathy</strong></p>
+
+
+<p>Put yourself in the position of the rest of your team. Try to think like they think, to understand their problems and help them.</p>
+
+
+<p>I've always liked to know as much as possible about the platform running my software. When I started as a freelance software developer, my websites and webapps where running in a shared hosting environment. The amount of problems and frustration made me realize how hard it is to be a good Systems Administrator. I moved all my clients into VMs. This meant I was now doing Systems Administration too, but it provided me with a ton of learning experiences.</p>
+
+
+<p>The same goes for frontend development, mobile, etc...</p>
+
+
+<h3>What I still have to learn</h3>
+
+
+<p><strong>Continuous deployment</strong></p>
+
+
+<p>I've never had the opportunity to work in a project when I could release as often as we made changes. I'm looking forward to doing so.</p>
+
+
+<p><strong>Test-Driven Development</strong></p>
+
+
+<p>It's easier said than done. TDD requires a certain level of work stability, self-discipline and focus I've just never been able to find. I'm making an effort to change this. </p>
+
+
+<p><strong>Domain-Driven Development</strong></p>
+
+
+<p>Such a huge topic. Digging into DDD feels like going down the rabbit hole. This paradigm could very well be as big as the <strong>Agile</strong> methodologies have been.</p>
+
+
+<p><strong>Mobility</strong></p>
+
+
+<p>Even though we worked in a few Mobile projects, all of them where part of the Digital Signage platform we built. I'd love to work on a project where the mobile client is the main focus.</p>
+
+
+<p><strong>High scalability</strong></p>
+
+
+<p>None of the projects I've worked have reached the numbers that high traffic systems support nowadays. Millions of daily active users. That's a whole new level, and I want to reach that.</p>
+
+
+
