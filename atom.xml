@@ -3,12 +3,32 @@
   <title>Orestes Carracedo</title>
   <link href="http://blog.orestes.io/atom.xml" rel="self" />
   <link href="http://blog.orestes.io" />
-  <updated>2015-02-15T22:58:14+00:00</updated>
+  <updated>2015-02-28T23:01:45+00:00</updated>
   <id>http://blog.orestes.io</id>
   <author>
     <name></name>
     <email>orestes.ca@gmail.com</email>
   </author>
+  
+  <entry>
+    <title>Hardware</title>
+    <link href="http://blog.orestes.io/archive/2015/02/28/hardware"/>
+    <updated>2015-02-28T00:00:00+00:00</updated>
+    <id>http://blog.orestes.io/archive/2015/02/28/hardware</id>
+    <content type="html">
+
+&lt;p&gt;Being a software developer is nice. Learning something new usually means downloading some SDK, running some new software or writting a different software. But still, the vast majority of written software runs on the same kinds of machines; screens. More often than not, you get to run your software on fancy touchscreens, interact with a mouse and keyboard. I like to break those boundaries and play with stuff that doesn't need a user to fullfill a purpose.&lt;/p&gt;
+
+&lt;p&gt;A few years ago, I bough an Arduino starter kit, and embarked on an the awesome journey to the Internet Of Things&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/RtDnTdLKDbM&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;&lt;p&gt;This simple experiment doesn't look like much, but to me, it felt incredibly liberating. From then on, sensors, servos and DC motors have made learning really fun.&lt;/p&gt;
+
+&lt;p&gt;If you're looking for a fun hobby that involves programming, I cannot recommend this enough. I recently got a &lt;a href=&quot;http://fritzing.org/shop/starter-kit/&quot; target=&quot;_bnlank&quot;&gt;Fritzing Starter Kit&lt;/a&gt; and I coultn't be happier!&lt;/p&gt;
+
+</content>
+  </entry>
   
   <entry>
     <title>Learning</title>
